@@ -93,8 +93,8 @@
   <input type="search"
          class="form-control"
          name="q"
-         placeholder="Search..."
-         aria-label="Search..."
+         placeholder="Search this book..."
+         aria-label="Search this book..."
          autocomplete="off"
          autocorrect="off"
          autocapitalize="off"
@@ -161,6 +161,14 @@
 </button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    About Me
+                </a>
+            </li>
+        </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">LLMs</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Creating Brochures with LLMs</a></li>
@@ -320,7 +328,7 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="creating-brochures-with-llms">
+  <section id="creating-brochures-with-llms">
 <h1>Creating Brochures with LLMs<a class="headerlink" href="#creating-brochures-with-llms" title="Link to this heading">#</a></h1>
 <p>In this tutorial, we will explore how Python and Large Language Models (LLMs) can be used to transform website content into a polished company brochure. With LLMs like OpenAI’s GPT-4, you can automate brochure creation by combining webpage parsing, prompt engineering, and content generation. Let’s dive in!</p>
 <p>We begin by importing the necessary libraries. These tools will handle everything from HTML parsing to interacting with the OpenAI API.</p>

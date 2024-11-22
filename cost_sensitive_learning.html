@@ -92,8 +92,8 @@
   <input type="search"
          class="form-control"
          name="q"
-         placeholder="Search..."
-         aria-label="Search..."
+         placeholder="Search this book..."
+         aria-label="Search this book..."
          autocomplete="off"
          autocorrect="off"
          autocapitalize="off"
@@ -160,6 +160,14 @@
 </button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    About Me
+                </a>
+            </li>
+        </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">LLMs</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="llm_brochure_maker.html">Creating Brochures with LLMs</a></li>
@@ -311,6 +319,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-and-inspecting-data">Loading and Inspecting Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#splitting-data">Splitting Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-costs-and-profit-metrics">Defining Costs and Profit Metrics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#establishing-a-baseline">Establishing a Baseline</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-cost-sensitive-models">Building Cost-Sensitive Models</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing-pipelines">Preprocessing Pipelines</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-models-and-hyperparameters">Defining Models and Hyperparameters</a></li>
@@ -330,7 +339,7 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="cost-sensitive-learning">
+  <section id="cost-sensitive-learning">
 <h1>Cost-Sensitive Learning<a class="headerlink" href="#cost-sensitive-learning" title="Link to this heading">#</a></h1>
 <p>In many real-world classification scenarios, the costs associated with incorrect predictions are asymmetric. For instance, a false positive might be less costly than a false negative, or vice versa. These differences can significantly impact decision-making, especially when one class is rarer but more critical. Cost-sensitive learning helps address these challenges.</p>
 <p>Imagine an online retail company planning a direct-mail marketing campaign. Each offer costs $5 to produce and send, and customers who redeem an offer typically make purchases totaling $50. The objective is to maximize profit by targeting customers most likely to redeem offers while minimizing misclassification costs:</p>
@@ -624,7 +633,9 @@
 </div>
 </div>
 </div>
-<p>Establishing a Baseline</p>
+</section>
+<section id="establishing-a-baseline">
+<h2>Establishing a Baseline<a class="headerlink" href="#establishing-a-baseline" title="Link to this heading">#</a></h2>
 <p>To understand the limits of profit, we compute metrics for two extremes:</p>
 <ol class="arabic simple">
 <li><p>A <strong>Perfect</strong> model that predicts flawlessly.</p></li>
@@ -1075,6 +1086,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-and-inspecting-data">Loading and Inspecting Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#splitting-data">Splitting Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-costs-and-profit-metrics">Defining Costs and Profit Metrics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#establishing-a-baseline">Establishing a Baseline</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-cost-sensitive-models">Building Cost-Sensitive Models</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing-pipelines">Preprocessing Pipelines</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-models-and-hyperparameters">Defining Models and Hyperparameters</a></li>

@@ -1,0 +1,843 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Creating Brochures with LLMs &#8212; Portfolio</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'llm_brochure_maker';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Cost-Sensitive Learning" href="cost_sensitive_learning.html" />
+    <link rel="prev" title="About Me" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/altair-hist.png" class="logo__image only-light" alt="Portfolio - Home"/>
+    <img src="_static/altair-hist.png" class="logo__image only-dark pst-js-only" alt="Portfolio - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    About Me
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">LLMs</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Creating Brochures with LLMs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Predictive Modeling</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="cost_sensitive_learning.html">Cost-Sensitive Learning</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/uwdata/visualization-curriculum" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/uwdata/visualization-curriculum/issues/new?title=Issue%20on%20page%20%2Fllm_brochure_maker.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/llm_brochure_maker.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Creating Brochures with LLMs</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="creating-brochures-with-llms">
+<h1>Creating Brochures with LLMs<a class="headerlink" href="#creating-brochures-with-llms" title="Link to this heading">#</a></h1>
+<p>In this tutorial, we will explore how Python and Large Language Models (LLMs) can be used to transform website content into a polished company brochure. With LLMs like OpenAI’s GPT-4, you can automate brochure creation by combining webpage parsing, prompt engineering, and content generation. Let’s dive in!</p>
+<p>We begin by importing the necessary libraries. These tools will handle everything from HTML parsing to interacting with the OpenAI API.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Markdown</span><span class="p">,</span> <span class="n">display</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+<span class="kn">from</span> <span class="nn">openai</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">os</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here, we:</p>
+<ul class="simple">
+<li><p>Use BeautifulSoup for HTML parsing.</p></li>
+<li><p>Use dotenv to securely load environment variables like the OpenAI API key.</p></li>
+<li><p>Import OpenAI’s Python library to interact with GPT-4.</p></li>
+</ul>
+<p>To securely use the OpenAI API, we store our key in an .env file and load it into our script.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">load_dotenv</span><span class="p">()</span>
+
+<span class="n">api_key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;OPENAI_API_KEY&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This step ensures sensitive credentials are not exposed directly in the code.</p>
+<p>Next, we instantiate the OpenAI client to make API calls later.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">openai</span> <span class="o">=</span> <span class="n">OpenAI</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We define a Website class to scrape and clean webpage data. This class extracts titles, main text, and hyperlinks from a given URL.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Website</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="n">url</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+
+        <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">string</span> <span class="k">if</span> <span class="n">soup</span><span class="o">.</span><span class="n">title</span> <span class="k">else</span> <span class="s1">&#39;No title found.&#39;</span>
+
+        <span class="k">if</span> <span class="n">soup</span><span class="o">.</span><span class="n">body</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">irrelevant</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">body</span><span class="p">([</span><span class="s1">&#39;script&#39;</span><span class="p">,</span> <span class="s1">&#39;style&#39;</span><span class="p">,</span> <span class="s1">&#39;img&#39;</span><span class="p">,</span> <span class="s1">&#39;input&#39;</span><span class="p">]):</span>
+                <span class="n">irrelevant</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span>
+
+            <span class="n">text</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">get_text</span><span class="p">(</span><span class="n">separator</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">strip</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">split</span><span class="p">())</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+        <span class="n">links</span> <span class="o">=</span> <span class="p">[</span><span class="n">link</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">links</span> <span class="o">=</span> <span class="p">[</span><span class="n">link</span> <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">links</span> <span class="k">if</span> <span class="n">link</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">get_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Webpage Title:</span><span class="se">\n</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">Webpage Contents:</span><span class="se">\n</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This class does the following:</p>
+<ul class="simple">
+<li><p>Fetches the HTML content of the page.</p></li>
+<li><p>Removes unnecessary elements like scripts and styles.</p></li>
+<li><p>Extracts meaningful text and hyperlinks.</p></li>
+</ul>
+<p>We now use the Website class to parse a webpage and print the content.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://www.anthropic.com/&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">website</span> <span class="o">=</span> <span class="n">Website</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">website</span><span class="o">.</span><span class="n">get_contents</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Webpage Title:
+Home \ Anthropic
+
+Webpage Contents:
+that put safety at the frontier
+Meet Claude 3.5 Sonnet
+Claude 3.5 Sonnet, our most intelligent AI model, is now available.
+Talk to Claude
+Build with Claude
+Start using Claude to drive efficiency and create new revenue streams.
+Introducing computer use, a new Claude 3.5 Sonnet, and Claude 3.5 Haiku
+Oct 22, 2024
+Claude for Enterprise
+Sep 4, 2024
+Constitutional AI: Harmlessness from AI Feedback
+Dec 15, 2022
+Core Views on AI Safety: When, Why, What, and How
+Mar 8, 2023
+Work with Anthropic
+Anthropic is an AI safety and research company based in San Francisco. Our interdisciplinary team has experience across ML, physics, policy, and product. Together, we generate research and create reliable, beneficial AI systems.
+See open roles
+Terms of Service – Consumer
+Terms of Service – Commercial
+Responsible Disclosure Policy
+© 2024 Anthropic PBC
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we identify links relevant to creating the brochure. For example, “About,” “Careers,” and “Products” pages are usually essential. This prompt defines how the AI will identify and categorize relevant links for the brochure.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">link_system_prompt</span> <span class="o">=</span> <span class="s1">&#39;You are provided with a list of links found on a webpage. </span><span class="se">\</span>
+<span class="s1">You are able to decide which of the links would be most relevant to include in a brochure about the company, </span><span class="se">\</span>
+<span class="s1">such as links to an About page, or a Company page, or Careers/Jobs pages. You should respond in JSON as in this example:&#39;</span>
+
+<span class="n">link_system_prompt</span> <span class="o">+=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">{</span>
+<span class="s2">    &quot;links&quot;: [</span>
+<span class="s2">        {&quot;type&quot;: &quot;about page&quot;, &quot;url&quot;: &quot;https://full.url/goes/here/about&quot;},</span>
+<span class="s2">        {&quot;type&quot;: &quot;careers page&quot;: &quot;url&quot;: &quot;https://another.full.url/careers&quot;}</span>
+<span class="s2">    ]</span>
+<span class="s2">}</span>
+<span class="s2">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">link_system_prompt</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>You are provided with a list of links found on a webpage. You are able to decide which of the links would be most relevant to include in a brochure about the company, such as links to an About page, or a Company page, or Careers/Jobs pages. You should respond in JSON as in this example:
+{
+    &quot;links&quot;: [
+        {&quot;type&quot;: &quot;about page&quot;, &quot;url&quot;: &quot;https://full.url/goes/here/about&quot;},
+        {&quot;type&quot;: &quot;careers page&quot;: &quot;url&quot;: &quot;https://another.full.url/careers&quot;}
+    ]
+}
+</pre></div>
+</div>
+</div>
+</div>
+<p>We dynamically include the links retrieved from the website in a user prompt. This creates a complete user prompt that the AI can analyze.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">link_user_prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Here is the list of links on the website of </span><span class="si">{</span><span class="n">website</span><span class="o">.</span><span class="n">url</span><span class="si">}</span><span class="s2">. </span><span class="se">\</span>
+<span class="s2">Please decide which of these are relevant web links for a brochure about the company. </span><span class="se">\</span>
+<span class="s2">Respond with the full https URL in JSON format. Do not include Terms of Service, Privacy, or email links. </span><span class="se">\</span>
+<span class="s2">Note that some of these might be relative links:</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+
+<span class="n">link_user_prompt</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">website</span><span class="o">.</span><span class="n">links</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">link_user_prompt</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Here is the list of links on the website of https://www.anthropic.com/. Please decide which of these are relevant web links for a brochure about the company. Respond with the full https URL in JSON format. Do not include Terms of Service, Privacy, or email links. Note that some of these might be relative links:
+
+/
+/claude
+/team
+/enterprise
+/api
+/pricing
+/research
+/company
+/careers
+/news
+https://www.anthropic.com/research#entry:8@1:url
+https://www.anthropic.com/claude
+https://claude.ai/
+/api
+/news/3-5-models-and-computer-use
+/claude/sonnet
+/claude/haiku
+/news/claude-for-enterprise
+/research/constitutional-ai-harmlessness-from-ai-feedback
+/news/core-views-on-ai-safety
+/jobs
+/
+/claude
+/api
+/team
+/pricing
+/research
+/company
+/customers
+/news
+/careers
+mailto:press@anthropic.com
+https://support.anthropic.com/
+https://status.anthropic.com/
+/supported-countries
+https://twitter.com/AnthropicAI
+https://www.linkedin.com/company/anthropicresearch
+https://www.youtube.com/@anthropic-ai
+/legal/consumer-terms
+/legal/commercial-terms
+/legal/privacy
+/legal/aup
+/responsible-disclosure-policy
+https://trust.anthropic.com/
+</pre></div>
+</div>
+</div>
+</div>
+<p>We send the prompts to the LLM to generate content based on the website information. This step retrieves the AI’s filtered list of links categorized as “About,” “Careers,” etc.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="s1">&#39;gpt-4o-mini&#39;</span><span class="p">,</span>
+    <span class="n">messages</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">{</span><span class="s1">&#39;role&#39;</span><span class="p">:</span> <span class="s1">&#39;system&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="n">link_system_prompt</span><span class="p">},</span>
+        <span class="p">{</span><span class="s1">&#39;role&#39;</span><span class="p">:</span> <span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="n">link_user_prompt</span><span class="p">}</span>
+    <span class="p">],</span>
+    <span class="n">response_format</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;json_object&#39;</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
+    &quot;links&quot;: [
+        {&quot;type&quot;: &quot;about page&quot;, &quot;url&quot;: &quot;https://www.anthropic.com/company&quot;},
+        {&quot;type&quot;: &quot;careers page&quot;, &quot;url&quot;: &quot;https://www.anthropic.com/careers&quot;},
+        {&quot;type&quot;: &quot;team page&quot;, &quot;url&quot;: &quot;https://www.anthropic.com/team&quot;},
+        {&quot;type&quot;: &quot;research page&quot;, &quot;url&quot;: &quot;https://www.anthropic.com/research&quot;},
+        {&quot;type&quot;: &quot;enterprise page&quot;, &quot;url&quot;: &quot;https://www.anthropic.com/enterprise&quot;},
+        {&quot;type&quot;: &quot;api page&quot;, &quot;url&quot;: &quot;https://www.anthropic.com/api&quot;},
+        {&quot;type&quot;: &quot;pricing page&quot;, &quot;url&quot;: &quot;https://www.anthropic.com/pricing&quot;},
+        {&quot;type&quot;: &quot;news page&quot;, &quot;url&quot;: &quot;https://www.anthropic.com/news&quot;}
+    ]
+}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Using the links and content from the website, we create a final prompt for the AI to generate the brochure. We append the extracted content to this prompt and send it to the LLM.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">brochure_system_prompt</span> <span class="o">=</span> <span class="s1">&#39;You are an assistant that analyzes the contents of several relevant pages from a company website </span><span class="se">\</span>
+<span class="s1">and creates a short brochure about the company for prospective customers, investors, and recruits. Respond in markdown. </span><span class="se">\</span>
+<span class="s1">Include details about company culture, customers, and careers/jobs if you have the information.&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">company_name</span> <span class="o">=</span> <span class="s1">&#39;Anthropic&#39;</span>
+
+<span class="n">brochure_user_prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;You are looking at website information for a company called </span><span class="si">{</span><span class="n">company_name</span><span class="si">}</span><span class="s2">. </span><span class="se">\</span>
+<span class="s2">Here are the contents of the company landing page and other relevant pages. </span><span class="se">\</span>
+<span class="s2">Use this information to build a short brochure for the company in markdown.&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+<span class="n">brochure_user_prompt</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">LANDING PAGE:</span><span class="se">\n</span><span class="si">{</span><span class="n">Website</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">get_contents</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">result_json</span><span class="p">[</span><span class="s1">&#39;links&#39;</span><span class="p">]:</span>
+    <span class="n">brochure_user_prompt</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">link</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}</span><span class="s2">:</span><span class="se">\n</span><span class="si">{</span><span class="n">Website</span><span class="p">(</span><span class="n">link</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">get_contents</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="n">brochure_user_prompt</span> <span class="o">=</span> <span class="n">brochure_user_prompt</span><span class="p">[:</span><span class="mi">20000</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The AI generates a polished brochure in markdown format, ready for review:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="s1">&#39;gpt-4o-mini&#39;</span><span class="p">,</span>
+    <span class="n">messages</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">{</span><span class="s1">&#39;role&#39;</span><span class="p">:</span> <span class="s1">&#39;system&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="n">brochure_system_prompt</span><span class="p">},</span>
+        <span class="p">{</span><span class="s1">&#39;role&#39;</span><span class="p">:</span> <span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="n">brochure_user_prompt</span><span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">Markdown</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<h1 class="rubric" id="anthropic-advancing-ai-safety-for-a-better-future">Anthropic: Advancing AI Safety for a Better Future</h1>
+<h2 class="rubric" id="who-we-are">Who We Are</h2>
+<p>Anthropic is a leading AI safety and research company located in San Francisco. We are on a mission to ensure that transformative AI technology benefits humanity. Our aim is to create reliable, interpretable, and steerable AI systems, leveraging interdisciplinary expertise from fields such as machine learning, physics, policy, and product development.</p>
+<h3 class="rubric" id="our-products">Our Products</h3>
+<ul class="simple">
+<li><p><strong>Claude 3.5 Sonnet &amp; Haiku</strong>: Advanced AI models designed to drive efficiency and revenue streams for businesses and organizations.</p></li>
+<li><p><strong>Claude for Enterprise</strong>: Tailored solutions that securely integrate AI into company workflows, leveraging internal knowledge for enhanced collaboration and output.</p></li>
+</ul>
+<h2 class="rubric" id="our-culture">Our Culture</h2>
+<p>At Anthropic, we prioritize a high-trust work environment that fosters collaboration and intellectual openness. Our team is diverse and passionate, comprising researchers, engineers, policy experts, and business leaders who share a commitment to AI safety. We value honesty, emotional maturity, and encourage contributions across various projects.</p>
+<h3 class="rubric" id="core-principles">Core Principles</h3>
+<ul class="simple">
+<li><p><strong>Collaboration</strong>: We believe in teamwork across all levels, with everyone contributing to our shared mission.</p></li>
+<li><p><strong>Pragmatism</strong>: We celebrate simple solutions and value empirical approaches that yield actionable insights.</p></li>
+<li><p><strong>Continuous Learning</strong>: We seek to share our findings with the broader community and learn from external collaborators.</p></li>
+</ul>
+<h2 class="rubric" id="our-customers">Our Customers</h2>
+<p>We cater to a wide range of clients, including businesses, nonprofits, and civil society groups seeking to adopt safe AI solutions. With Claude, teams can enhance productivity, generate insights rapidly, and collaborate seamlessly.</p>
+<h2 class="rubric" id="careers-at-anthropic">Careers at Anthropic</h2>
+<p>We are always looking for talented individuals eager to contribute to the field of AI. We offer a dynamic work environment and a comprehensive benefits package that includes:</p>
+<ul class="simple">
+<li><p><strong>Health &amp; Wellness</strong>: Competitive health, dental, and vision insurance, mental health support, and inclusive fertility benefits.</p></li>
+<li><p><strong>Compensation &amp; Support</strong>: Competitive salary, equity packages, generous parental leave, home office stipends, and continuous growth through education stipends.</p></li>
+<li><p><strong>A Focus on Diversity</strong>: We welcome varied experiences and backgrounds, aiming to create a truly inclusive work environment.</p></li>
+</ul>
+<h3 class="rubric" id="join-us">Join Us!</h3>
+<p>Explore open roles on our <a class="reference external" href="#">Careers Page</a> and be a part of a mission-driven organization making a tangible impact in the AI landscape.</p>
+<hr class="docutils" />
+<p>For more detailed insights about our products, team, or research initiatives, feel free to visit our website or contact us directly. Join Anthropic as we strive for a future where AI technologies are safely integrated into society and enhance human capabilities.</p>
+</div>
+</div>
+<p>This workflow demonstrates how to automate brochure creation using LLMs. By leveraging webpage parsing, prompt engineering, and AI’s generative capabilities, businesses can efficiently create professional marketing materials tailored to their needs. Try this approach to save time and enhance your content creation process!</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">About Me</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="cost_sensitive_learning.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Cost-Sensitive Learning</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Kyle DeGrave
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

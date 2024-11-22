@@ -60,8 +60,6 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'cost_sensitive_learning';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -173,7 +171,7 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="llm_brochure_maker.html">Creating Brochures with LLMs</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Predictive Modeling</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Modeling</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Cost-Sensitive Learning</a></li>
 </ul>
@@ -363,8 +361,18 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#baseline-models">Baseline Models</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cost-sensitive-modeling">Cost-Sensitive Modeling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-libraries">Importing Libraries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-and-inspecting-data">Loading and Inspecting Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#splitting-data">Splitting Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-costs-and-profit-metrics">Defining Costs and Profit Metrics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-cost-sensitive-models">Building Cost-Sensitive Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing-pipelines">Preprocessing Pipelines</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-models-and-hyperparameters">Defining Models and Hyperparameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-models">Evaluating Models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-results">Visualizing Results</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
 </ul>
             </nav>
         </div>
@@ -378,60 +386,16 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="cost-sensitive-learning">
 <h1>Cost-Sensitive Learning<a class="headerlink" href="#cost-sensitive-learning" title="Link to this heading">#</a></h1>
-<p>In many real-world classification scenarios, the costs associated with incorrect predictions are asymmetric. This means that the cost of a false positive is different from that of a false negative. Often, one class is less prevalent but holds higher importance than the other, leading to imbalanced datasets. Minimizing these asymmetric costs does not always align perfectly with maximizing metrics like the area under the receiver operating characteristic curve (AUC-ROC) or F1-score. Additionally, relying on a probability threshold of 0.5, the default decision value for most classifiers, may not result in optimal model performance. To address the issue of asymmetric costs, advanced modeling techniques can be employed.</p>
-<p>Consider an online retail company planning a direct-mail marketing campaign to promote a new product. The company has compiled purchase histories and demographic information for each customer to target a subset of individuals with offers. From previous campaigns, several factors impact the cost of sending an offer:</p>
-<ol class="arabic simple">
-<li><p>Design</p></li>
-<li><p>Materials</p></li>
-<li><p>Printing and production</p></li>
-<li><p>Postage and delivery</p></li>
-<li><p>Labor and overhead</p></li>
-</ol>
-<p>Each offer costs <span class="math notranslate nohighlight">\(\$5\)</span> to produce and send. Customers who redeem an offer typically make purchases totaling <span class="math notranslate nohighlight">\(\$50\)</span>. The objective of the campaign is to maximize revenue from redeemed offers while effectively managing costs.</p>
-<p>A predictive model will be built using the customer data to identify individuals most likely to redeem an offer and make a purchase. In this retail scenario, the costs associated with misclassification are asymmetric:</p>
-<ul class="simple">
-<li><p><strong>False Positive (FP):</strong> Sending the offer to someone who will not make a purchase, incurring a <span class="math notranslate nohighlight">\(\$5\)</span> cost.</p></li>
-<li><p><strong>False Negative (FN):</strong> Not sending an offer to someone who would have made a purchase, representing a missed opportunity cost of <span class="math notranslate nohighlight">\(\$45\)</span> (the <span class="math notranslate nohighlight">\(\$50\)</span> purchase minus the <span class="math notranslate nohighlight">\(\$5\)</span> offer cost).</p></li>
-<li><p><strong>True Positive (TP):</strong> Sending an offer to someone who will make a purchase, incurring a <span class="math notranslate nohighlight">\(\$5\)</span> cost.</p></li>
-<li><p><strong>True Negative (TN):</strong> Not sending an offer to someone who would not have made a purchase, incurring <span class="math notranslate nohighlight">\(\$0\)</span> cost.</p></li>
-</ul>
-<p>The costs can be summarized in the following matrix, where <span class="math notranslate nohighlight">\(N\)</span> represents the number of customers in each classification bucket:</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p></p></th>
-<th class="head"><p>Actual Negative</p></th>
-<th class="head"><p>Actual Positive</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><strong>Predicted Negative</strong></p></td>
-<td><p><span class="math notranslate nohighlight">\(0N_{tn}\)</span></p></td>
-<td><p><span class="math notranslate nohighlight">\(45N_{fn}\)</span></p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Predicted Positive</strong></p></td>
-<td><p><span class="math notranslate nohighlight">\(5N_{fp}\)</span></p></td>
-<td><p><span class="math notranslate nohighlight">\(5N_{tp}\)</span></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>The total profit can be calculated as:</p>
-<div class="math notranslate nohighlight">
-\[\textrm{Total Profit} = 50N_{tp} - (5N_{tp} + 5N_{fp} + 45N_{fn})\]</div>
-<p>There are several ways to approach the problem of asymmetric costs. Two common methods include:</p>
-<ol class="arabic simple">
-<li><p><strong>Incorporating Class Weights:</strong> Assigning misclassification costs during training alters the model’s loss function and decision boundary, ensuring greater attention is paid to the more valuable class.</p></li>
-<li><p><strong>Threshold Optimization:</strong> After training, optimizing the decision threshold minimizes misclassification costs. This threshold is often different from the standard probability threshold of 0.5.</p></li>
-</ol>
-<p>Both approaches will be explored in this context.</p>
-<p>Let’s get started by importing some useful libraries and loading the data!</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39;
-</pre></div>
-</div>
-</div>
-</div>
+<p>In many real-world classification scenarios, the costs associated with incorrect predictions are asymmetric. For instance, a false positive might be less costly than a false negative, or vice versa. These differences can significantly impact decision-making, especially when one class is rarer but more critical. Cost-sensitive learning helps address these challenges.</p>
+<p>Imagine an online retail company planning a direct-mail marketing campaign. Each offer costs $5 to produce and send, and customers who redeem an offer typically make purchases totaling $50. The objective is to maximize profit by targeting customers most likely to redeem offers while minimizing misclassification costs:</p>
+<p><strong>False Positive (FP)</strong>: Sending the offer to someone who won’t purchase costs $5.</p>
+<p><strong>False Negative (FN)</strong>: Not sending the offer to someone who would purchase costs $45 (missed revenue).</p>
+<p><strong>True Positive (TP)</strong>: Sending the offer to someone who will purchase incurs a $5 cost but results in $50 revenue.</p>
+<p><strong>True Negative (TN)</strong>: Not sending the offer to someone who wouldn’t purchase incurs no cost.</p>
+<p>Here’s how we can address this using Python and machine learning techniques.</p>
+<section id="importing-libraries">
+<h2>Importing Libraries<a class="headerlink" href="#importing-libraries" title="Link to this heading">#</a></h2>
+<p>We begin by importing the necessary libraries for data processing, model building, and evaluation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
@@ -456,16 +420,15 @@
 </div>
 </div>
 </div>
+</section>
+<section id="loading-and-inspecting-data">
+<h2>Loading and Inspecting Data<a class="headerlink" href="#loading-and-inspecting-data" title="Link to this heading">#</a></h2>
+<p>Next, we load the customer dataset and take a look at its structure. The data contains demographics, purchase histories, and a target variable indicating whether a customer redeemed a prior offer.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/marketing_campaign.csv&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -666,8 +629,11 @@
 </table>
 </div></div></div>
 </div>
-<p>The dataset includes demographic information and purchase histories for over two thousand customers. The demographic data include features like age, education level, marital status, and income, offering a comprehensive overview of the customer base. The purchase histories include dollar amounts spent across different product channels, number of purchases through different sales media, and features indicating whether a customer has redeemed other prior offers.</p>
-<p>The data are split into training and test sets prior to analysis. The training set, containing 1,563 records, will be used to build the predictive model, while the test set, containing 670 records, will be used to evaluate model performance.</p>
+<p>The dataset includes features such as age, education, marital status, and various spending metrics, offering a comprehensive overview of customer behaviors.</p>
+</section>
+<section id="splitting-data">
+<h2>Splitting Data<a class="headerlink" href="#splitting-data" title="Link to this heading">#</a></h2>
+<p>We split the data into training and test sets to build and evaluate the model.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_tr</span><span class="p">,</span> <span class="n">x_te</span><span class="p">,</span> <span class="n">y_tr</span><span class="p">,</span> <span class="n">y_te</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Target&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Target&#39;</span><span class="p">],</span> <span class="n">stratify</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Target&#39;</span><span class="p">],</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -675,25 +641,18 @@
 </div>
 </div>
 </div>
+<p>This ensures that both sets maintain the original class distribution, essential for cost-sensitive learning.</p>
+</section>
+<section id="defining-costs-and-profit-metrics">
+<h2>Defining Costs and Profit Metrics<a class="headerlink" href="#defining-costs-and-profit-metrics" title="Link to this heading">#</a></h2>
+<p>Here, we set the cost of sending an offer and the revenue generated by a purchase. We also define a function to compute profits based on the confusion matrix.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">y_te</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>99
-</pre></div>
-</div>
-</div>
-</div>
-<p>The test set contains 99 customers who will redeem an offer and make a purchase.</p>
-<section id="baseline-models">
-<h2>Baseline Models<a class="headerlink" href="#baseline-models" title="Link to this heading">#</a></h2>
-<p>The function below will display the costs, revenue gained from purchases, and the total profit for models under different scenarios.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compute_cost_metrics</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">y_actual</span><span class="p">,</span> <span class="n">y_predict</span><span class="p">,</span> <span class="n">max_profit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">return_profit</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cost_offer</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="n">revenue_sale</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="k">def</span> <span class="nf">compute_cost_metrics</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">y_actual</span><span class="p">,</span> <span class="n">y_predict</span><span class="p">,</span> <span class="n">max_profit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">return_profit</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 
     <span class="n">tn</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">tp</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_actual</span><span class="p">,</span> <span class="n">y_predict</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
 
@@ -713,22 +672,17 @@
 <span class="s2">        Percent of max: </span><span class="si">{</span><span class="mi">100</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">exp_r</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">exp_c</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">max_profit</span><span class="si">:</span><span class="s2">0.1f</span><span class="si">}</span><span class="s2">%</span>
 <span class="s2">        &quot;&quot;&quot;</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">return_profit</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span> <span class="k">return</span> <span class="p">(</span><span class="n">exp_r</span> <span class="o">-</span> <span class="n">exp_c</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">return_profit</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">exp_r</span> <span class="o">-</span> <span class="n">exp_c</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>The cost associated with producing and mailing an offer is \$5, and the average purchase amount upon redeeming an offer is $50. We can set those variables here.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cost_offer</span> <span class="o">=</span> <span class="mi">5</span>
-
-<span class="n">revenue_sale</span> <span class="o">=</span> <span class="mi">50</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Let’s first use the test set to compute the expected profit from a perfect model. The <strong>Perfect Model</strong> is one in which only customers who will certainly make a purchase are sent an offer. It generates no false positive or false negatives, resulting in the maximum possible revenue through purchases while minimizing costs. In reality, it is never the case where the purchasers are known ahead of time, but the Perfect model will set a limit as to the maximum profit any model could hope to achieve.</p>
+<p>Establishing a Baseline</p>
+<p>To understand the limits of profit, we compute metrics for two extremes:</p>
+<ol class="arabic simple">
+<li><p>A <strong>Perfect</strong> model that predicts flawlessly.</p></li>
+</ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">max_profit</span> <span class="o">=</span> <span class="n">compute_cost_metrics</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="s1">&#39;Perfect Model&#39;</span><span class="p">,</span> <span class="n">y_actual</span><span class="o">=</span><span class="n">y_te</span><span class="p">,</span> <span class="n">y_predict</span><span class="o">=</span><span class="n">y_te</span><span class="p">,</span> <span class="n">return_profit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -746,7 +700,9 @@
 </div>
 </div>
 </div>
-<p>The Perfect model results in a total profit of \$4,455. Next, a Baseline model can be produced which simply sends an offer to every customer in the dataset.</p>
+<ol class="arabic simple" start="2">
+<li><p>A <strong>Baseline</strong> model that sends offers to all customers, incurring high costs due to false positives.</p></li>
+</ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">baseline_profit</span> <span class="o">=</span> <span class="n">compute_cost_metrics</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="s1">&#39;Baseline Model&#39;</span><span class="p">,</span> <span class="n">y_actual</span><span class="o">=</span><span class="n">y_te</span><span class="p">,</span> <span class="n">y_predict</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y_te</span><span class="p">)),</span> <span class="n">max_profit</span><span class="o">=</span><span class="n">max_profit</span><span class="p">,</span> <span class="n">return_profit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -764,45 +720,37 @@
 </div>
 </div>
 </div>
-<p>The <strong>Baseline Model</strong> generates a large revenue but also incurs a very high cost as a result of so many false positives. The total profit is just \$1,600, or 35.9% that of the Perfect model.</p>
-<p>Now let’s employ cost-sensitive learning to create models that can generate high revenue but are able to more effectively manage costs. Two models will be built - one with class weights and one without. The models will be incorporated as part of a scikit-learn pipeline. This will allow for the simultaneous one-hot encoding of categorical features, and the scaling of numerical ones when necessary.</p>
+<p>The baseline provides a benchmark for evaluating subsequent models.</p>
 </section>
-<section id="cost-sensitive-modeling">
-<h2>Cost-Sensitive Modeling<a class="headerlink" href="#cost-sensitive-modeling" title="Link to this heading">#</a></h2>
+<section id="building-cost-sensitive-models">
+<h2>Building Cost-Sensitive Models<a class="headerlink" href="#building-cost-sensitive-models" title="Link to this heading">#</a></h2>
+<p>We now explore two modeling approaches:</p>
+<ol class="arabic simple">
+<li><p><strong>Class Weight Adjustment</strong>: Incorporate misclassification costs directly into the model’s loss function.</p></li>
+<li><p><strong>Threshold Optimization</strong>: Adjust the decision threshold post-training to minimize costs.</p></li>
+</ol>
+<section id="preprocessing-pipelines">
+<h3>Preprocessing Pipelines<a class="headerlink" href="#preprocessing-pipelines" title="Link to this heading">#</a></h3>
+<p>We preprocess numerical and categorical features for the models.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">categorical_columns</span> <span class="o">=</span> <span class="n">x_tr</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="s1">&#39;object&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 
 <span class="n">numerical_columns</span> <span class="o">=</span> <span class="n">x_tr</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="s1">&#39;number&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numerical_transformer</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span>
+
+<span class="n">numerical_transformer</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span>
     <span class="n">steps</span><span class="o">=</span><span class="p">[</span>
         <span class="p">(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
     <span class="p">]</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">categorical_transformer</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span>
+
+<span class="n">categorical_transformer</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span>
     <span class="n">steps</span><span class="o">=</span><span class="p">[</span>
         <span class="p">(</span><span class="s1">&#39;encoder&#39;</span><span class="p">,</span> <span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">handle_unknown</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">sparse_output</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
     <span class="p">]</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preprocessor</span> <span class="o">=</span> <span class="n">ColumnTransformer</span><span class="p">(</span>
+
+<span class="n">preprocessor</span> <span class="o">=</span> <span class="n">ColumnTransformer</span><span class="p">(</span>
     <span class="n">transformers</span><span class="o">=</span><span class="p">[</span>
         <span class="p">(</span><span class="s1">&#39;numerical&#39;</span><span class="p">,</span> <span class="n">numerical_transformer</span><span class="p">,</span> <span class="n">numerical_columns</span><span class="p">),</span>
         <span class="p">(</span><span class="s1">&#39;categorical&#39;</span><span class="p">,</span> <span class="n">categorical_transformer</span><span class="p">,</span> <span class="n">categorical_columns</span><span class="p">)</span>
@@ -812,7 +760,10 @@
 </div>
 </div>
 </div>
-<p>Three model types will be tested here: logistic regression, random forests, and support vector classifiers. Hyperparameters for each will be incorporated in a parameter grid that will be searched using <code class="docutils literal notranslate"><span class="pre">GridSearchCV</span></code>. The models with the best ROC AUC scores for the two class weight scenarioes will be used for analysis.</p>
+</section>
+<section id="defining-models-and-hyperparameters">
+<h3>Defining Models and Hyperparameters<a class="headerlink" href="#defining-models-and-hyperparameters" title="Link to this heading">#</a></h3>
+<p>We test three classifiers—Logistic Regression, Random Forest, and SVM—using grid search to optimize hyperparameters.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">class_weight</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="n">cost_offer</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="p">(</span><span class="n">revenue_sale</span> <span class="o">-</span> <span class="n">cost_offer</span><span class="p">)}</span>
@@ -842,6 +793,7 @@
 </div>
 </div>
 </div>
+<p>These are combined with the preprocessor in a pipeline.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span>
@@ -850,13 +802,8 @@
         <span class="p">(</span><span class="s1">&#39;classifier&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
     <span class="p">]</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grid_cv</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">param_grid</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;roc_auc&#39;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">refit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">grid_cv</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">param_grid</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;roc_auc&#39;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">refit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
 <span class="n">grid_cv</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_tr</span><span class="p">,</span> <span class="n">y_tr</span><span class="p">);</span>
 </pre></div>
@@ -887,6 +834,10 @@
 </li>
 </ul>
 <p>Let’s load the saved models and apply them to the test set.</p>
+</section>
+<section id="evaluating-models">
+<h3>Evaluating Models<a class="headerlink" href="#evaluating-models" title="Link to this heading">#</a></h3>
+<p>We compare models with and without class weights, assessing profits at different thresholds. Models with class weights generally align better with cost-sensitive objectives.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_wo</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="s1">&#39;models/cost_sensitive_without_class_weight.joblib&#39;</span><span class="p">)</span>
@@ -940,9 +891,11 @@
 </div>
 </div>
 </div>
-<p>In situations involving imbalanced datasets, relying on the standard decision threshold probability of 0.5 frequently leads to poor predictive performance. This is exemplified by the <strong>Without Class Weights Model</strong> where the total profit is negative, indicating an overall loss. The performance of this model can be improved significantly through proper tuning of the decision threshold.</p>
-<p>Conversely, the <strong>With Class Weights Model</strong> performs well with the default classificaiton threshold, yielding a profit reaching 64.4% that of the <strong>Perfect Model</strong>. This is an 80% increase over the <strong>Baseline Model</strong> in which all customers are contacted. Despite this improvement, the performance of this model can also be further optimized through threshold tuning.</p>
-<p>Let’s compare the ROC curves for the two models.</p>
+<p>The <strong>Without Class Weights</strong> model leads to an overall loss. The performance of this model can be improved significantly through proper tuning of the decision threshold. Conversely, the <strong>With Class Weights</strong> model performs well with the default classificaiton threshold, yielding a profit reaching 64.4% that of the <strong>Perfect</strong> model. This is an 80% increase over the <strong>Baseline</strong> model in which all customers are contacted.</p>
+</section>
+<section id="visualizing-results">
+<h3>Visualizing Results<a class="headerlink" href="#visualizing-results" title="Link to this heading">#</a></h3>
+<p>We can plot ROC curves and profit thresholds to illustrate performance and optimal decision points.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fpr_a</span><span class="p">,</span> <span class="n">tpr_a</span><span class="p">,</span> <span class="n">threshold_a</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_te</span><span class="p">,</span> <span class="n">predict_wo</span><span class="p">)</span>
@@ -980,23 +933,13 @@
 <a class="reference internal image-reference" href="_images/c296f37ce7c41e723e23c36ebe93d5b4283e5f47d15b7beb8f39fc1fea7b64cc.png"><img alt="_images/c296f37ce7c41e723e23c36ebe93d5b4283e5f47d15b7beb8f39fc1fea7b64cc.png" src="_images/c296f37ce7c41e723e23c36ebe93d5b4283e5f47d15b7beb8f39fc1fea7b64cc.png" style="width: 460px; height: 383px;" /></a>
 </div>
 </div>
-<p>The black points on the two curves indicate their approximate elbow. The elbow marks the decision threshold where the true positive rate is maximized and the false positive rate is minimized, and represents the “optimal” model when costs are considered symmetric. Let’s compute the expected profit using these two threshold values.</p>
+<p>The “elbow” of the ROC curves (blak points) represents the optimal balance between true positive and false positive rates, where performance is maximized under symmetric cost assumptions. Let’s calculate profits using these optimal threshold values.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">compute_cost_metrics</span><span class="p">(</span><span class="s1">&#39;Without Class Weights, Optimal ROC Threshold&#39;</span><span class="p">,</span>
                      <span class="n">y_actual</span><span class="o">=</span><span class="n">y_te</span><span class="p">,</span>
                      <span class="n">y_predict</span><span class="o">=</span><span class="n">predict_wo</span> <span class="o">&gt;=</span> <span class="n">threshold_a</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">tpr_a</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">fpr_a</span><span class="p">))],</span>
                      <span class="n">max_profit</span><span class="o">=</span><span class="n">max_profit</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        <span class=" -Color -Color-Bold">Without Class Weights, Optimal ROC Threshold</span>
-        Revenue: $4,350
-        Costs: $1,430
-        Total profit: $2,920
-        Percent of max: 65.5%
-        
 </pre></div>
 </div>
 </div>
@@ -1010,19 +953,8 @@
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        <span class=" -Color -Color-Bold">With Class Weights, Optimal ROC Threshold</span>
-        Revenue: $4,450
-        Costs: $1,510
-        Total profit: $2,940
-        Percent of max: 66.0%
-        
-</pre></div>
 </div>
-</div>
-</div>
-<p>We can see that the <strong>With Class Weights Model</strong> performs only slightly better than before, but the <strong>Without Class Weights Model</strong> shows significant improvement. Both models have now reached an expected profit that is approximately 65% that of the <strong>Perfect Model</strong>.</p>
-<p>Finally, we can create a function to compute the expected profit over a series of different thresholds.</p>
+<p>The With Class Weights model shows a modest improvement, while the Without Class Weights model demonstrates significant gains. Both models now achieve approximately 65% of the profit of the Perfect model. Finally, let’s define a function to calculate the expected profit across various thresholds.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compute_profit</span><span class="p">(</span><span class="n">y_actual</span><span class="p">,</span> <span class="n">y_predict</span><span class="p">):</span>
@@ -1087,7 +1019,7 @@
 <a class="reference internal image-reference" href="_images/0f966e09aaa9d8a5897cdbdb0dfbda77c30f38706ac81482b7fde40c1f0ea64d.png"><img alt="_images/0f966e09aaa9d8a5897cdbdb0dfbda77c30f38706ac81482b7fde40c1f0ea64d.png" src="_images/0f966e09aaa9d8a5897cdbdb0dfbda77c30f38706ac81482b7fde40c1f0ea64d.png" style="width: 460px; height: 383px;" /></a>
 </div>
 </div>
-<p>We can see that both models reach approximately the same maximum profit but at different classification thresholds. The black points denote the expected profit using the ROC elbow values and the red points mark the maximum possible profit achievable by the models. Let’s see what these maximum profits are.</p>
+<p>Both models achieve nearly the same maximum profit, albeit at different classification thresholds. The black points indicate the profits at the ROC elbow thresholds, while the red points highlight the highest possible profits each model can achieve. Let’s examine these maximum profits in detail.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">compute_cost_metrics</span><span class="p">(</span><span class="s1">&#39;Without Class Weights, Optimal Profit Threshold&#39;</span><span class="p">,</span>
@@ -1128,7 +1060,12 @@
 </div>
 </div>
 </div>
-<p>The <strong>Without Class Weights Model</strong> achieves a profit that is over twice the profit of the <strong>Baseline Model</strong>, reaching 74% that of the <strong>Perfect Model</strong>.</p>
+<p>The <strong>Without Class Weights</strong> model achieves a profit that is over twice the profit of the <strong>Baseline</strong> model, reaching 74% that of the <strong>Perfect</strong> model.</p>
+</section>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>Cost-sensitive learning enables businesses to make informed decisions in scenarios with asymmetric costs. By incorporating cost-awareness into model training and evaluation, we can achieve substantial profit improvements over baseline approaches, as demonstrated in this campaign scenario.</p>
 </section>
 </section>
 
@@ -1188,8 +1125,18 @@
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#baseline-models">Baseline Models</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cost-sensitive-modeling">Cost-Sensitive Modeling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-libraries">Importing Libraries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-and-inspecting-data">Loading and Inspecting Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#splitting-data">Splitting Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-costs-and-profit-metrics">Defining Costs and Profit Metrics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-cost-sensitive-models">Building Cost-Sensitive Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing-pipelines">Preprocessing Pipelines</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-models-and-hyperparameters">Defining Models and Hyperparameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-models">Evaluating Models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-results">Visualizing Results</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
 </ul>
   </nav></div>
 

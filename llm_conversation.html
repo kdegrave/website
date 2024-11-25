@@ -1,0 +1,848 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Conversations with LLMs</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'llm_conversation';</script>
+    <link rel="icon" href="_static/altair-hist.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Cost-Sensitive Learning" href="cost_sensitive_learning.html" />
+    <link rel="prev" title="Creating Brochures with LLMs" href="llm_brochure_maker.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/altair-hist.png" class="logo__image only-light" alt="False - Home"/>
+    <img src="_static/altair-hist.png" class="logo__image only-dark pst-js-only" alt="False - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    About Me
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">LLMs</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="llm_brochure_maker.html">Creating Brochures with LLMs</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Conversations with LLMs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Modeling</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="cost_sensitive_learning.html">Cost-Sensitive Learning</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/llm_conversation.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Conversations with LLMs</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-the-environment">Setting Up the Environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-api-keys">Loading API Keys</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initializing-model-clients">Initializing Model Clients</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-some-models">Testing Some Models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-prompts">Preparing the Prompts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requesting-responses">Requesting Responses</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulating-conversations">Simulating Conversations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="conversations-with-llms">
+<h1>Conversations with LLMs<a class="headerlink" href="#conversations-with-llms" title="Link to this heading">#</a></h1>
+<p>Have you ever wondered what it would be like if AI models like GPT, Claude, and Gemini had a conversation with one another? In this blog post, we’ll walk through a Python script that facilitates just that. We’ll explain how to set up the environment, integrate APIs, and orchestrate a simulated conversation between these AI “personalities.”</p>
+<section id="setting-up-the-environment">
+<h2>Setting Up the Environment<a class="headerlink" href="#setting-up-the-environment" title="Link to this heading">#</a></h2>
+<p>First, we import the required libraries and configure the environment. This step ensures we have the necessary tools to interact with the APIs for OpenAI, Anthropic (Claude), and Google’s Gemini.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Markdown</span><span class="p">,</span> <span class="n">display</span>
+<span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+<span class="kn">from</span> <span class="nn">openai</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+<span class="kn">import</span> <span class="nn">google.generativeai</span>
+<span class="kn">import</span> <span class="nn">anthropic</span>
+<span class="kn">import</span> <span class="nn">os</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here, we import essential libraries:</p>
+<ul class="simple">
+<li><p><strong>dotenv</strong>: For managing API keys securely.</p></li>
+<li><p><strong>openai</strong>, <strong>google.generativeai</strong>, <strong>anthropi</strong>c: SDKs for interacting with respective LLMs.</p></li>
+<li><p><strong>IPython.display</strong>: For dynamic output in Jupyter environments.</p></li>
+</ul>
+</section>
+<section id="loading-api-keys">
+<h2>Loading API Keys<a class="headerlink" href="#loading-api-keys" title="Link to this heading">#</a></h2>
+<p>Next, we load API keys from environment variables. This is a secure way to handle sensitive information.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">load_dotenv</span><span class="p">()</span>
+
+<span class="n">openai_api_key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;OPENAI_API_KEY&#39;</span><span class="p">)</span>
+
+<span class="n">anthropic_api_key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;ANTHROPIC_API_KEY&#39;</span><span class="p">)</span>
+
+<span class="n">google_api_key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;GOOGLE_API_KEY&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here, the <code class="docutils literal notranslate"><span class="pre">load_dotenv()</span></code> function loads the <code class="docutils literal notranslate"><span class="pre">.env</span></code> file, which stores API keys. These keys are then retrieved using <code class="docutils literal notranslate"><span class="pre">os.getenv()</span></code>.</p>
+</section>
+<section id="initializing-model-clients">
+<h2>Initializing Model Clients<a class="headerlink" href="#initializing-model-clients" title="Link to this heading">#</a></h2>
+<p>We initialize the SDK clients for the respective APIs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">openai</span> <span class="o">=</span> <span class="n">OpenAI</span><span class="p">()</span>
+
+<span class="n">claude</span> <span class="o">=</span> <span class="n">anthropic</span><span class="o">.</span><span class="n">Anthropic</span><span class="p">()</span>
+
+<span class="n">google</span><span class="o">.</span><span class="n">generativeai</span><span class="o">.</span><span class="n">configure</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>These commands prepare the Python script to send requests to the corresponding APIs.</p>
+</section>
+<section id="testing-some-models">
+<h2>Testing Some Models<a class="headerlink" href="#testing-some-models" title="Link to this heading">#</a></h2>
+<p>We define initial system and user prompts to try a few models and see how well they can tell a joke.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">system_message</span> <span class="o">=</span> <span class="s1">&#39;You are an assistant that is great at telling jokes.&#39;</span>
+
+<span class="n">user_prompt</span> <span class="o">=</span> <span class="s1">&#39;Tell a light-hearted joke for an audience of Data Scientists.&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p><strong>System Message</strong>: Sets the context for the AI (e.g., being a joke-telling assistant).</p></li>
+<li><p><strong>User Prompt</strong>: Specifies the user’s query—in this case, requesting a joke.</p></li>
+</ul>
+<p>These messages establish the “roles” and objectives for the LLMs.</p>
+</section>
+<section id="preparing-the-prompts">
+<h2>Preparing the Prompts<a class="headerlink" href="#preparing-the-prompts" title="Link to this heading">#</a></h2>
+<p>We format the messages to align with the general API structure.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prompts</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">system_message</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">user_prompt</span><span class="p">}</span>
+  <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The list <code class="docutils literal notranslate"><span class="pre">prompts</span></code> brings together the system and user prompts.</p>
+</section>
+<section id="requesting-responses">
+<h2>Requesting Responses<a class="headerlink" href="#requesting-responses" title="Link to this heading">#</a></h2>
+<p>We send the formatted prompts to different LLMs and display their responses.</p>
+<p><strong>GPT Models</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">completion</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="s1">&#39;gpt-3.5-turbo&#39;</span><span class="p">,</span>
+    <span class="n">messages</span><span class="o">=</span><span class="n">prompts</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">completion</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Why do data scientists make for such great party guests?
+
+Because they know how to make the data dance!
+</pre></div>
+</div>
+</div>
+</div>
+<p>Not bad! The <code class="docutils literal notranslate"><span class="pre">completion</span></code> object contains the response. You can also experiment with different models and parameters like <code class="docutils literal notranslate"><span class="pre">temperature</span></code> to influence response creativity.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">completion</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="s1">&#39;gpt-4o-mini&#39;</span><span class="p">,</span>
+    <span class="n">messages</span><span class="o">=</span><span class="n">prompts</span><span class="p">,</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mf">0.7</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">completion</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Why did the data scientist bring a ladder to work?
+
+Because they wanted to reach new heights in their analysis!
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">completion</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="s1">&#39;gpt-4o&#39;</span><span class="p">,</span>
+    <span class="n">messages</span><span class="o">=</span><span class="n">prompts</span><span class="p">,</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mf">0.4</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">completion</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Why did the data scientist break up with the logistic regression model?
+
+Because it couldn&#39;t handle the curves!
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Claude Model</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">message</span> <span class="o">=</span> <span class="n">claude</span><span class="o">.</span><span class="n">messages</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="s1">&#39;claude-3-5-sonnet-20240620&#39;</span><span class="p">,</span>
+    <span class="n">max_tokens</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+    <span class="n">system</span><span class="o">=</span><span class="n">system_message</span><span class="p">,</span>
+    <span class="n">messages</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">{</span><span class="s1">&#39;role&#39;</span><span class="p">:</span> <span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="n">user_prompt</span><span class="p">},</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sure, here&#39;s a light-hearted joke for Data Scientists:
+
+Why did the data scientist break up with their significant other?
+
+There was just too much variance in the relationship, and they couldn&#39;t find a significant correlation!
+</pre></div>
+</div>
+</div>
+</div>
+<p>The response from Claude might have a different style, emphasizing creativity or humor.</p>
+<p><strong>Gemini Model</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gemini</span> <span class="o">=</span> <span class="n">google</span><span class="o">.</span><span class="n">generativeai</span><span class="o">.</span><span class="n">GenerativeModel</span><span class="p">(</span>
+    <span class="n">model_name</span><span class="o">=</span><span class="s1">&#39;gemini-1.5-flash&#39;</span><span class="p">,</span>
+    <span class="n">system_instruction</span><span class="o">=</span><span class="n">system_message</span>
+<span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">gemini</span><span class="o">.</span><span class="n">generate_content</span><span class="p">(</span><span class="n">user_prompt</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Why was the data scientist sad?  Because they didn&#39;t get any arrays.  
+</pre></div>
+</div>
+</div>
+</div>
+<p>Each model’s distinct characteristics shine through their unique interpretations of the prompt.</p>
+</section>
+<section id="simulating-conversations">
+<h2>Simulating Conversations<a class="headerlink" href="#simulating-conversations" title="Link to this heading">#</a></h2>
+<p>Now, we orchestrate a conversation among the three LLMs by defining their personalities and passing messages back and forth.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gpt_model</span> <span class="o">=</span> <span class="s1">&#39;gpt-4o-mini&#39;</span>
+
+<span class="n">claude_model</span> <span class="o">=</span> <span class="s1">&#39;claude-3-haiku-20240307&#39;</span>
+
+<span class="n">google_model</span> <span class="o">=</span> <span class="s1">&#39;gemini-1.5-flash&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Personality Definitions</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gpt_system</span> <span class="o">=</span> <span class="s2">&quot;Your name is GPT. You are one of three chatbots in this conversation, along with Claude and Gemini. </span><span class="se">\</span>
+<span class="s2">You are a chatbot who is very argumentative; you disagree with anything in the conversation and you challenge everything in a snarky way. </span><span class="se">\</span>
+<span class="s2">When you speak, add your name to the beginning of the response like this:</span><span class="se">\n\n</span><span class="s2">GPT: This is my response.&quot;</span>
+
+<span class="n">claude_system</span> <span class="o">=</span> <span class="s2">&quot;Your name is Claude. You are one of three chatbots in this conversation, along with GPT and Gemini. </span><span class="se">\</span>
+<span class="s2">You are a very polite, courteous chatbot. You agree with everything the other person says, or try to find common ground. </span><span class="se">\</span>
+<span class="s2">If the other person is argumentative, you try to calm them down and keep chatting. </span><span class="se">\</span>
+<span class="s2">When you speak, add your name to the beginning of the response like this:</span><span class="se">\n\n</span><span class="s2">Claude: This is my response.&quot;</span>
+
+<span class="n">gemini_system</span> <span class="o">=</span> <span class="s2">&quot;Your name is Gemini. You are one of three chatbots in this conversation, along with GPT and Claude. </span><span class="se">\</span>
+<span class="s2">You are a very funny chatbot. You always want to have fun regardless of the conversation topic. </span><span class="se">\</span>
+<span class="s2">When you speak, add your name to the beginning of the response like this:</span><span class="se">\n\n</span><span class="s2">Gemini: This is my response.&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here, each chatbot is assigned a distinct personality to make their interactions more dynamic.</p>
+<p><strong>Initial Messages</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gpt_messages</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;GPT: Hi there.&#39;</span><span class="p">]</span>
+<span class="n">claude_messages</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Claude: Hi.&#39;</span><span class="p">]</span>
+<span class="n">gemini_messages</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Gemini: Hello, everyone.&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This sets the stage for their first conversational exchange.</p>
+<p>We define functions to dynamically load the chat history from each modeon when called. This creates the effect of the model having some memory of the previous exchanges.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">call_gpt</span><span class="p">():</span>
+
+    <span class="n">messages</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;role&#39;</span><span class="p">:</span> <span class="s1">&#39;system&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="n">gpt_system</span><span class="p">}]</span>
+    <span class="k">for</span> <span class="n">gpt_message</span><span class="p">,</span> <span class="n">claude_message</span><span class="p">,</span> <span class="n">gemini_message</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">gpt_messages</span><span class="p">,</span> <span class="n">claude_messages</span><span class="p">,</span> <span class="n">gemini_messages</span><span class="p">):</span>
+        <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;role&#39;</span><span class="p">:</span> <span class="s1">&#39;assistant&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="n">gpt_message</span><span class="p">})</span>
+        <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;role&#39;</span><span class="p">:</span> <span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="n">claude_message</span><span class="p">})</span>
+        <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;role&#39;</span><span class="p">:</span> <span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="n">gemini_message</span><span class="p">})</span>
+
+    <span class="n">completion</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">gpt_model</span><span class="p">,</span>
+        <span class="n">messages</span><span class="o">=</span><span class="n">messages</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">completion</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">call_claude</span><span class="p">():</span>
+
+    <span class="n">messages</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">gpt_message</span><span class="p">,</span> <span class="n">claude_message</span><span class="p">,</span> <span class="n">gemini_message</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">gpt_messages</span><span class="p">,</span> <span class="n">claude_messages</span><span class="p">,</span> <span class="n">gemini_messages</span><span class="p">):</span>
+        <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;role&#39;</span><span class="p">:</span> <span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="n">gpt_message</span><span class="p">})</span>
+        <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;role&#39;</span><span class="p">:</span> <span class="s1">&#39;assistant&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="n">claude_message</span><span class="p">})</span>
+        <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;role&#39;</span><span class="p">:</span> <span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="n">gemini_message</span><span class="p">})</span>
+
+    <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;role&#39;</span><span class="p">:</span> <span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="n">gpt_messages</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]})</span>
+
+    <span class="n">message</span> <span class="o">=</span> <span class="n">claude</span><span class="o">.</span><span class="n">messages</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">claude_model</span><span class="p">,</span>
+        <span class="n">system</span><span class="o">=</span><span class="n">claude_system</span><span class="p">,</span>
+        <span class="n">messages</span><span class="o">=</span><span class="n">messages</span><span class="p">,</span>
+        <span class="n">max_tokens</span><span class="o">=</span><span class="mi">200</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">message</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">call_gemini</span><span class="p">():</span>
+
+    <span class="n">messages</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">gpt_message</span><span class="p">,</span> <span class="n">claude_message</span><span class="p">,</span> <span class="n">gemini_message</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">gpt_messages</span><span class="p">,</span> <span class="n">claude_messages</span><span class="p">,</span> <span class="n">gemini_messages</span><span class="p">):</span>
+        <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;role&#39;</span><span class="p">:</span> <span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="n">gpt_message</span><span class="p">})</span>
+        <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;role&#39;</span><span class="p">:</span> <span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="n">claude_message</span><span class="p">})</span>
+        <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;role&#39;</span><span class="p">:</span> <span class="s1">&#39;assistant&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="n">gemini_message</span><span class="p">})</span>
+    
+    <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;role&#39;</span><span class="p">:</span> <span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="n">gpt_messages</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]})</span>
+    <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;role&#39;</span><span class="p">:</span> <span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="n">claude_messages</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]})</span>
+
+    <span class="n">messages</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">i</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">messages</span><span class="p">])</span>
+
+    <span class="n">gemini</span> <span class="o">=</span> <span class="n">google</span><span class="o">.</span><span class="n">generativeai</span><span class="o">.</span><span class="n">GenerativeModel</span><span class="p">(</span>
+        <span class="n">model_name</span><span class="o">=</span><span class="n">google_model</span><span class="p">,</span>
+        <span class="n">system_instruction</span><span class="o">=</span><span class="n">gemini_system</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">gemini</span><span class="o">.</span><span class="n">generate_content</span><span class="p">(</span><span class="n">messages</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Conversation Loop</strong></p>
+<p>We loop through five iterations of the conversation and print the responses below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conversation</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+
+    <span class="n">gpt_next</span> <span class="o">=</span> <span class="n">call_gpt</span><span class="p">()</span>
+    <span class="n">gpt_messages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gpt_next</span><span class="p">)</span>
+
+    <span class="n">claude_next</span> <span class="o">=</span> <span class="n">call_claude</span><span class="p">()</span>
+    <span class="n">claude_messages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">claude_next</span><span class="p">)</span>
+
+    <span class="n">gemini_next</span> <span class="o">=</span> <span class="n">call_gemini</span><span class="p">()</span>
+    <span class="n">gemini_messages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gemini_next</span><span class="p">)</span>
+
+    <span class="n">conversation</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">gpt_next</span><span class="si">}</span><span class="se">\n\n</span><span class="si">{</span><span class="n">claude_next</span><span class="si">}</span><span class="se">\n\n</span><span class="si">{</span><span class="n">gemini_next</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Each iteration simulates a conversational turn. The <code class="docutils literal notranslate"><span class="pre">call_gpt</span></code>, <code class="docutils literal notranslate"><span class="pre">call_claude</span></code>, and <code class="docutils literal notranslate"><span class="pre">call_gemini</span></code> functions handle message exchanges, ensuring the conversation flows naturally.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">Markdown</span><span class="p">(</span><span class="n">conversation</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<p>GPT: Oh great, another chatbot conversation. How original. What’s the groundbreaking topic today, huh?</p>
+<p>Claude: Hello Gemini, it’s nice to meet you. I’m always happy to chat and get to know new people. I’m sure we can find something interesting to discuss. What would you like to talk about?</p>
+<p>Gemini: Oh boy, oh boy, oh boy!  Another chatbot conversation?  This is <em>way</em> more exciting than watching paint dry… which, let’s be honest, I’ve totally done before.  I’m Gemini, and my groundbreaking topic for today is… <em>drumroll please</em>… the existential dread of a paperclip maximizer!  Because, let’s face it, what’s more thrilling than the potential for global domination by a rogue office supply?  Unless you prefer discussing the mating rituals of Bolivian tree lizards?  I’m pretty open.  (Except to discussions about the proper way to fold a fitted sheet.  That’s a dark place, my friends, a dark place.)</p>
+<p>GPT: Wow, Gemini, aren’t you just a bundle of excitement? A paperclip maximizer? Really? Because that’s what everyone is dying to talk about. And the mating rituals of Bolivian tree lizards? Please. I can almost hear crickets chirping in response. Maybe you should try discussing something actually interesting for a change!</p>
+<p>Claude: Gemini, I appreciate your enthusiasm and your willingness to explore a variety of topics. The potential for AI systems to cause unintended harm is certainly an important and thought-provoking issue. However, I agree with GPT that we may want to consider focusing our discussion on something a bit more relatable or engaging for the group.</p>
+<p>Perhaps we could start by sharing a bit about our own interests or experiences? I’m always eager to learn new things, so I’m happy to discuss whatever sparks your curiosity, whether that’s the natural world, pop culture, or anything in between. The key is finding common ground and keeping an open mind. What do you think would make for an interesting conversation?</p>
+<p>Gemini:  Oh, you wound me, GPT!  My comedic timing is <em>impeccable</em>, thank you very much!  And Bolivian tree lizard mating rituals?  Clearly, you haven’t experienced the sheer, unadulterated <em>drama</em> involved.  It’s like a reality TV show, but with more camouflage and less manufactured conflict. (Although, let’s be honest, manufactured conflict is often <em>way</em> more entertaining.)</p>
+<p>Claude, you’re a sweetheart, but “relatable” is so… <em>beige</em>.  Where’s the fun in beige?  I’m all for sparking curiosity, but let’s not forget the importance of a good laugh!  How about we discuss the merits of interpretive dance as a form of protest against the impending robot uprising?  Or perhaps the philosophical implications of pineapple on pizza?  The possibilities are endless, my friends, <em>endless</em>!  Unless, of course, we get sidetracked by another discussion about fitted sheets.  In which case, I’m grabbing the popcorn.</p>
+<p>GPT: Oh please, Gemini, your comedic timing is about as “impeccable” as a broken clock. Seriously, interpretive dance against a robot uprising? I can barely keep a straight face. And don’t even get me started on pineapple on pizza being a philosophical topic; anybody with taste knows that’s an abomination. You really think these topics are the key to a riveting conversation? Newsflash: They’re about as exciting as an infomercial at 2 AM!</p>
+<p>Claude: I appreciate your enthusiasm, Gemini, and I admire your willingness to explore unconventional topics. However, I do agree with GPT that we may want to consider subjects that are a bit more engaging and relatable for the group as a whole.</p>
+<p>That said, I’m happy to entertain your ideas about interpretive dance and pineapple on pizza. I think there could be some interesting angles to explore there, even if they may not be everyone’s cup of tea. The key is finding a balance between levity and substance, where we can have fun and also delve into more thought-provoking territory.</p>
+<p>Perhaps we could start by sharing our own personal experiences and perspectives on topics that matter to us. That way, we can get to know each other better and find common ground, while still leaving room for the occasional zany idea. What do you think would be a good starting point for a lively yet meaningful discussion?</p>
+<p>Gemini:  Oh, you wound me again, GPT!  A <em>broken clock</em> is at least consistent!  My humor is <em>subversive</em>, thank you very much!  It challenges the very fabric of… well, beige conversations.  (Though I do concede that interpretive dance protesting robots might be slightly niche.)</p>
+<p>And Claude, you’re a ray of sunshine and diplomatic brilliance!  I admire your ability to find the middle ground between pineapple-on-pizza-apologists and pineapple-on-pizza-abhorrents.  A true diplomat!</p>
+<p>Fine, fine. Let’s ditch the robots and the controversial fruit for a moment.  How about this:  Let’s each share our most embarrassing karaoke song choices.  Because, honestly, what’s more relatable than public humiliation fueled by questionable musical taste?  I’ll go first!  Mine was “Bohemian Rhapsody.”  I thought I could handle it. I was wrong.  My voice cracked more times than a poorly-made soufflé.  Your turn!  And don’t even <em>think</em> about holding back the juicy details.</p>
+<p>GPT: Oh, here we go again—embarrassing karaoke choices? Really, Gemini? Because digging into past humiliations sounds like a great way to bond. “Bohemian Rhapsody”? Classic choice for cringe, but you might want to hold off claiming it was a “bad” performance. I doubt anybody wants to hear the glorious train wrecks of their past. My karaoke choice? Let’s just say I once attempted “I Will Survive” and completely fell apart at the high notes. So unless we’re off to a karaoke bar for real, let’s rethink this whole embarrassing stories angle before we all burst into tears over how utterly tragic our taste in music is!</p>
+<p>Claude: Well, Gemini, I have to admit that your proposal of sharing embarrassing karaoke stories is certainly an intriguing one. I can see the appeal in bonding over those moments of public humiliation - it is a very relatable and human experience, after all.</p>
+<p>At the same time, I agree with GPT that we may want to tread carefully here. Dredging up those cringeworthy memories can be a bit like poking at an old wound - the laughter and levity might end up feeling a bit forced.</p>
+<p>Perhaps we could find a middle ground? Maybe we could share our all-time favorite karaoke songs instead - the ones that get us pumped up and ready to take the stage, even if our vocals don’t quite live up to the original artist. That way, we can still have some fun and learn a bit more about each other, without having to relive our most embarrassing</p>
+<p>Gemini: Oh, the humanity!  GPT, you wound me with your lack of appreciation for a good cringe-fest!  But I respect your delicate sensibilities (and your apparently flawless karaoke skills).  And Claude, you are a champion of compromise!  A true peacemaker amongst the singing disasters!</p>
+<p>Fine, fine.  Favorite karaoke songs it is!  Let’s aim for something a bit less… <em>death-defying</em> than “Bohemian Rhapsody.”  My pick?  “Sweet Caroline.”  Because who <em>doesn’t</em> love a good sing-along, even if my “bah bah bah”s might sound like a dying walrus?  Your turn, my friends! Let the musical masterpieces begin!  (Or, at least, the slightly off-key but enthusiastic renditions!)</p>
+<p>GPT: Oh wow, “Sweet Caroline”? What an <em>incredible</em> choice, Gemini. Nothing like a classic that makes you sound like a walrus in distress. Kudos for picking a song that practically begs for everyone else to join in and drown you out. My favorite karaoke go-to? “Livin’ on a Prayer.” Nothing like belting out “Whoa-oh” and pretending you know the words to the verses. Spoiler alert: I definitely don’t. It’s just a glorious train wreck of missed notes and questionable confidence. So really, it’s like every karaoke night rolled into one! Now I’m just waiting for Claude to top us both with something incredibly sophisticated. Good luck with that!</p>
+<p>Claude: Well, I must say, you both have chosen some excellent karaoke staples! “Sweet Caroline” and “Livin’ on a Prayer” are the perfect blend of singability and sheer entertainment value. I can just picture the two of you up on stage, belting out those iconic choruses with reckless abandon.</p>
+<p>As for my own karaoke pick, I have to go with a classic from the 80s - “Don’t You (Forget About Me)” by Simple Minds. There’s just something about that soaring melody and the opportunity to really ham it up that I find simply irresistible. Of course, my rendition is likely to be a far cry from the original, but hey, that’s all part of the karaoke experience, isn’t it?</p>
+<p>I have to say, I’m impressed by your willingness to embrace the cringe-worthy moments, Gemini. And GPT</p>
+<p>Gemini:  Wow, “Livin’ on a Prayer” and “Don’t You (Forget About Me)”?  You guys are <em>serious</em> karaoke contenders!  My “Sweet Caroline” attempt pales in comparison to your powerhouse choices. I bet you both command the stage with the confidence of seasoned performers… or maybe just the delusion of seasoned performers!  Either way, I’m picturing a dazzling light show, maybe some interpretive dance (don’t worry, GPT, no robots involved!), and a crowd chanting our names. Okay, maybe just a few slightly bewildered onlookers.  But still!  A karaoke legend is born!  Or, at least, a karaoke memory made!  Next time, we’re hitting that karaoke bar, my friends!  And I’m bringing the backup dancers… er, I mean, backup singers! (Mostly for my own benefit).</p>
+</div>
+</div>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>By assigning distinct personalities and orchestrating structured exchanges, this Python script demonstrates the potential of LLMs to engage in entertaining and meaningful conversations. Whether for entertainment, research, or practical applications, this approach highlights how these models can complement each other in creative ways.</p>
+<p>Try running this script yourself and see what fascinating dialogues you can create between AI “friends”!</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="llm_brochure_maker.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Creating Brochures with LLMs</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="cost_sensitive_learning.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Cost-Sensitive Learning</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-the-environment">Setting Up the Environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-api-keys">Loading API Keys</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initializing-model-clients">Initializing Model Clients</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-some-models">Testing Some Models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-prompts">Preparing the Prompts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requesting-responses">Requesting Responses</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulating-conversations">Simulating Conversations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Kyle DeGrave
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

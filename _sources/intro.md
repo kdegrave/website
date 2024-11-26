@@ -1,5 +1,5 @@
 # About Me
-Hi, I'm Kyle! I'm a data scientist with 7+ years of experience analyzing complex datasets and building predictive models. Passionate about leveraging data to overcome business challenges and drive informed decision making. Connect with me on [LinkedIn](https://www.linkedin.com/in/kyledegrave/).
+Hi, I'm Kyle. I'm a data scientist with over 7 years of experience analyzing complex datasets and building predictive models. Passionate about leveraging data to overcome business challenges and drive informed decision making. Connect with me on [LinkedIn](https://www.linkedin.com/in/kyledegrave/).
 
 **Technical Skills**
 * Programming Languages: Python, SQL, PySpark

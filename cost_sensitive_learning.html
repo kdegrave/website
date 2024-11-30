@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Cost-Sensitive Learning</title>
+    <title>1. Cost-Sensitive Learning</title>
   
   
   
@@ -61,11 +61,10 @@
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'cost_sensitive_learning';</script>
-    <link rel="icon" href="_static/altair-hist.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Predicting Housing Prices With Gradient Boosted Decision Trees" href="ames_housing_regression.html" />
-    <link rel="prev" title="Conversations with LLMs" href="llm_conversation.html" />
+    <link rel="next" title="2. Predicting Housing Prices With Gradient Boosted Decision Trees" href="ames_housing_regression.html" />
+    <link rel="prev" title="2. Conversations with LLMs" href="llm_conversation.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -171,13 +170,13 @@
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">LLMs</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="llm_brochure_maker.html">Creating Brochures with LLMs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="llm_conversation.html">Conversations with LLMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="llm_brochure_maker.html">1. Creating Brochures with LLMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="llm_conversation.html">2. Conversations with LLMs</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Other Projects</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Cost-Sensitive Learning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ames_housing_regression.html">Predicting Housing Prices With Gradient Boosted Decision Trees</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Cost-Sensitive Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ames_housing_regression.html">2. Predicting Housing Prices With Gradient Boosted Decision Trees</a></li>
 </ul>
 
     </div>
@@ -318,19 +317,19 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-libraries">Importing Libraries</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-and-inspecting-data">Loading and Inspecting Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#splitting-data">Splitting Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-costs-and-profit-metrics">Defining Costs and Profit Metrics</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#establishing-a-baseline">Establishing a Baseline</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-cost-sensitive-models">Building Cost-Sensitive Models</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing-pipelines">Preprocessing Pipelines</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-models-and-hyperparameters">Defining Models and Hyperparameters</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-models">Evaluating Models</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-results">Visualizing Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-libraries">1.1. Importing Libraries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-and-inspecting-data">1.2. Loading and Inspecting Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#splitting-data">1.3. Splitting Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-costs-and-profit-metrics">1.4. Defining Costs and Profit Metrics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#establishing-a-baseline">1.5. Establishing a Baseline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-cost-sensitive-models">1.6. Building Cost-Sensitive Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing-pipelines">1.6.1. Preprocessing Pipelines</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-models-and-hyperparameters">1.6.2. Defining Models and Hyperparameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-models">1.6.3. Evaluating Models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-results">1.6.4. Visualizing Results</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">1.7. Conclusion</a></li>
 </ul>
             </nav>
         </div>
@@ -343,7 +342,7 @@
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="cost-sensitive-learning">
-<h1>Cost-Sensitive Learning<a class="headerlink" href="#cost-sensitive-learning" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">1. </span>Cost-Sensitive Learning<a class="headerlink" href="#cost-sensitive-learning" title="Link to this heading">#</a></h1>
 <p>In many real-world classification scenarios, the costs associated with incorrect predictions are asymmetric. For instance, a false positive might be less costly than a false negative, or vice versa. These differences can significantly impact decision-making, especially when one class is rarer but more critical. Cost-sensitive learning helps address these challenges.</p>
 <p>Imagine an online retail company planning a direct-mail marketing campaign. Each offer costs $5 to produce and send, and customers who redeem an offer typically make purchases totaling $50. The objective is to maximize profit by targeting customers most likely to redeem offers while minimizing misclassification costs:</p>
 <p><strong>False Positive (FP)</strong>: Sending the offer to someone who won’t purchase costs $5.</p>
@@ -352,7 +351,7 @@
 <p><strong>True Negative (TN)</strong>: Not sending the offer to someone who wouldn’t purchase incurs no cost.</p>
 <p>Here’s how we can address this using Python and machine learning techniques.</p>
 <section id="importing-libraries">
-<h2>Importing Libraries<a class="headerlink" href="#importing-libraries" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.1. </span>Importing Libraries<a class="headerlink" href="#importing-libraries" title="Link to this heading">#</a></h2>
 <p>We begin by importing the necessary libraries for data processing, model building, and evaluation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -387,7 +386,7 @@
 </div>
 </section>
 <section id="loading-and-inspecting-data">
-<h2>Loading and Inspecting Data<a class="headerlink" href="#loading-and-inspecting-data" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.2. </span>Loading and Inspecting Data<a class="headerlink" href="#loading-and-inspecting-data" title="Link to this heading">#</a></h2>
 <p>Next, we load the customer dataset and take a look at its structure. The data contains demographics, purchase histories, and a target variable indicating whether a customer redeemed a prior offer.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -597,7 +596,7 @@
 <p>The dataset includes features such as age, education, marital status, and various spending metrics, offering a comprehensive overview of customer behaviors.</p>
 </section>
 <section id="splitting-data">
-<h2>Splitting Data<a class="headerlink" href="#splitting-data" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.3. </span>Splitting Data<a class="headerlink" href="#splitting-data" title="Link to this heading">#</a></h2>
 <p>We split the data into training and test sets to build and evaluate the model.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -609,7 +608,7 @@
 <p>This ensures that both sets maintain the original class distribution, essential for cost-sensitive learning.</p>
 </section>
 <section id="defining-costs-and-profit-metrics">
-<h2>Defining Costs and Profit Metrics<a class="headerlink" href="#defining-costs-and-profit-metrics" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.4. </span>Defining Costs and Profit Metrics<a class="headerlink" href="#defining-costs-and-profit-metrics" title="Link to this heading">#</a></h2>
 <p>Here, we set the cost of sending an offer and the revenue generated by a purchase. We also define a function to compute profits based on the confusion matrix.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -645,7 +644,7 @@
 </div>
 </section>
 <section id="establishing-a-baseline">
-<h2>Establishing a Baseline<a class="headerlink" href="#establishing-a-baseline" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.5. </span>Establishing a Baseline<a class="headerlink" href="#establishing-a-baseline" title="Link to this heading">#</a></h2>
 <p>To understand the limits of profit, we compute metrics for two extremes:</p>
 <ol class="arabic simple">
 <li><p>A <strong>Perfect</strong> model that predicts flawlessly.</p></li>
@@ -690,14 +689,14 @@
 <p>The baseline provides a benchmark for evaluating subsequent models.</p>
 </section>
 <section id="building-cost-sensitive-models">
-<h2>Building Cost-Sensitive Models<a class="headerlink" href="#building-cost-sensitive-models" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.6. </span>Building Cost-Sensitive Models<a class="headerlink" href="#building-cost-sensitive-models" title="Link to this heading">#</a></h2>
 <p>We now explore two modeling approaches:</p>
 <ol class="arabic simple">
 <li><p><strong>Class Weight Adjustment</strong>: Incorporate misclassification costs directly into the model’s loss function.</p></li>
 <li><p><strong>Threshold Optimization</strong>: Adjust the decision threshold post-training to minimize costs.</p></li>
 </ol>
 <section id="preprocessing-pipelines">
-<h3>Preprocessing Pipelines<a class="headerlink" href="#preprocessing-pipelines" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">1.6.1. </span>Preprocessing Pipelines<a class="headerlink" href="#preprocessing-pipelines" title="Link to this heading">#</a></h3>
 <p>We preprocess numerical and categorical features for the models.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -729,7 +728,7 @@
 </div>
 </section>
 <section id="defining-models-and-hyperparameters">
-<h3>Defining Models and Hyperparameters<a class="headerlink" href="#defining-models-and-hyperparameters" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">1.6.2. </span>Defining Models and Hyperparameters<a class="headerlink" href="#defining-models-and-hyperparameters" title="Link to this heading">#</a></h3>
 <p>We test three classifiers—Logistic Regression, Random Forest, and SVM—using grid search to optimize hyperparameters.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -803,7 +802,7 @@
 <p>Let’s load the saved models and apply them to the test set.</p>
 </section>
 <section id="evaluating-models">
-<h3>Evaluating Models<a class="headerlink" href="#evaluating-models" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">1.6.3. </span>Evaluating Models<a class="headerlink" href="#evaluating-models" title="Link to this heading">#</a></h3>
 <p>We compare models with and without class weights, assessing profits at different thresholds. Models with class weights generally align better with cost-sensitive objectives.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -861,7 +860,7 @@
 <p>The <strong>Without Class Weights</strong> model leads to an overall loss. The performance of this model can be improved significantly through proper tuning of the decision threshold. Conversely, the <strong>With Class Weights</strong> model performs well with the default classificaiton threshold, yielding a profit reaching 64.4% that of the <strong>Perfect</strong> model. This is an 80% increase over the <strong>Baseline</strong> model in which all customers are contacted.</p>
 </section>
 <section id="visualizing-results">
-<h3>Visualizing Results<a class="headerlink" href="#visualizing-results" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">1.6.4. </span>Visualizing Results<a class="headerlink" href="#visualizing-results" title="Link to this heading">#</a></h3>
 <p>We can plot ROC curves and profit thresholds to illustrate performance and optimal decision points.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1031,7 +1030,7 @@
 </section>
 </section>
 <section id="conclusion">
-<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.7. </span>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
 <p>Cost-sensitive learning enables businesses to make informed decisions in scenarios with asymmetric costs. By incorporating cost-awareness into model training and evaluation, we can achieve substantial profit improvements over baseline approaches, as demonstrated in this campaign scenario.</p>
 </section>
 </section>
@@ -1072,7 +1071,7 @@
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Conversations with LLMs</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>Conversations with LLMs</p>
       </div>
     </a>
     <a class="right-next"
@@ -1080,7 +1079,7 @@
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Predicting Housing Prices With Gradient Boosted Decision Trees</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>Predicting Housing Prices With Gradient Boosted Decision Trees</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1101,19 +1100,19 @@
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-libraries">Importing Libraries</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-and-inspecting-data">Loading and Inspecting Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#splitting-data">Splitting Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-costs-and-profit-metrics">Defining Costs and Profit Metrics</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#establishing-a-baseline">Establishing a Baseline</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-cost-sensitive-models">Building Cost-Sensitive Models</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing-pipelines">Preprocessing Pipelines</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-models-and-hyperparameters">Defining Models and Hyperparameters</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-models">Evaluating Models</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-results">Visualizing Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-libraries">1.1. Importing Libraries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-and-inspecting-data">1.2. Loading and Inspecting Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#splitting-data">1.3. Splitting Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-costs-and-profit-metrics">1.4. Defining Costs and Profit Metrics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#establishing-a-baseline">1.5. Establishing a Baseline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-cost-sensitive-models">1.6. Building Cost-Sensitive Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing-pipelines">1.6.1. Preprocessing Pipelines</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-models-and-hyperparameters">1.6.2. Defining Models and Hyperparameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-models">1.6.3. Evaluating Models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-results">1.6.4. Visualizing Results</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">1.7. Conclusion</a></li>
 </ul>
   </nav></div>
 

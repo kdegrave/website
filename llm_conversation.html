@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Conversations with LLMs</title>
+    <title>2. Conversations with LLMs</title>
   
   
   
@@ -61,11 +61,10 @@
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'llm_conversation';</script>
-    <link rel="icon" href="_static/altair-hist.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Cost-Sensitive Learning" href="cost_sensitive_learning.html" />
-    <link rel="prev" title="Creating Brochures with LLMs" href="llm_brochure_maker.html" />
+    <link rel="next" title="1. Cost-Sensitive Learning" href="cost_sensitive_learning.html" />
+    <link rel="prev" title="1. Creating Brochures with LLMs" href="llm_brochure_maker.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -171,13 +170,13 @@
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">LLMs</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="llm_brochure_maker.html">Creating Brochures with LLMs</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Conversations with LLMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="llm_brochure_maker.html">1. Creating Brochures with LLMs</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Conversations with LLMs</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Other Projects</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="cost_sensitive_learning.html">Cost-Sensitive Learning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ames_housing_regression.html">Predicting Housing Prices With Gradient Boosted Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cost_sensitive_learning.html">1. Cost-Sensitive Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ames_housing_regression.html">2. Predicting Housing Prices With Gradient Boosted Decision Trees</a></li>
 </ul>
 
     </div>
@@ -318,14 +317,14 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-the-environment">Setting Up the Environment</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-api-keys">Loading API Keys</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initializing-model-clients">Initializing Model Clients</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-some-models">Testing Some Models</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-prompts">Preparing the Prompts</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requesting-responses">Requesting Responses</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulating-conversations">Simulating Conversations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-the-environment">2.1. Setting Up the Environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-api-keys">2.2. Loading API Keys</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initializing-model-clients">2.3. Initializing Model Clients</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-some-models">2.4. Testing Some Models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-prompts">2.5. Preparing the Prompts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requesting-responses">2.6. Requesting Responses</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulating-conversations">2.7. Simulating Conversations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">2.8. Conclusion</a></li>
 </ul>
             </nav>
         </div>
@@ -338,10 +337,10 @@
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="conversations-with-llms">
-<h1>Conversations with LLMs<a class="headerlink" href="#conversations-with-llms" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">2. </span>Conversations with LLMs<a class="headerlink" href="#conversations-with-llms" title="Link to this heading">#</a></h1>
 <p>Have you ever wondered what it would be like if AI models like GPT, Claude, and Gemini had a conversation with one another? In this blog post, we’ll walk through a Python script that facilitates just that. We’ll explain how to set up the environment, integrate APIs, and orchestrate a simulated conversation between these AI “personalities.”</p>
 <section id="setting-up-the-environment">
-<h2>Setting Up the Environment<a class="headerlink" href="#setting-up-the-environment" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.1. </span>Setting Up the Environment<a class="headerlink" href="#setting-up-the-environment" title="Link to this heading">#</a></h2>
 <p>First, we import the required libraries and configure the environment. This step ensures we have the necessary tools to interact with the APIs for OpenAI, Anthropic (Claude), and Google’s Gemini.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -363,7 +362,7 @@
 </ul>
 </section>
 <section id="loading-api-keys">
-<h2>Loading API Keys<a class="headerlink" href="#loading-api-keys" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.2. </span>Loading API Keys<a class="headerlink" href="#loading-api-keys" title="Link to this heading">#</a></h2>
 <p>Next, we load API keys from environment variables. This is a secure way to handle sensitive information.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -381,7 +380,7 @@
 <p>Here, the <code class="docutils literal notranslate"><span class="pre">load_dotenv()</span></code> function loads the <code class="docutils literal notranslate"><span class="pre">.env</span></code> file, which stores API keys. These keys are then retrieved using <code class="docutils literal notranslate"><span class="pre">os.getenv()</span></code>.</p>
 </section>
 <section id="initializing-model-clients">
-<h2>Initializing Model Clients<a class="headerlink" href="#initializing-model-clients" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.3. </span>Initializing Model Clients<a class="headerlink" href="#initializing-model-clients" title="Link to this heading">#</a></h2>
 <p>We initialize the SDK clients for the respective APIs.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -397,7 +396,7 @@
 <p>These commands prepare the Python script to send requests to the corresponding APIs.</p>
 </section>
 <section id="testing-some-models">
-<h2>Testing Some Models<a class="headerlink" href="#testing-some-models" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.4. </span>Testing Some Models<a class="headerlink" href="#testing-some-models" title="Link to this heading">#</a></h2>
 <p>We define initial system and user prompts to try a few models and see how well they can tell a joke.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -415,7 +414,7 @@
 <p>These messages establish the “roles” and objectives for the LLMs.</p>
 </section>
 <section id="preparing-the-prompts">
-<h2>Preparing the Prompts<a class="headerlink" href="#preparing-the-prompts" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.5. </span>Preparing the Prompts<a class="headerlink" href="#preparing-the-prompts" title="Link to this heading">#</a></h2>
 <p>We format the messages to align with the general API structure.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -430,7 +429,7 @@
 <p>The list <code class="docutils literal notranslate"><span class="pre">prompts</span></code> brings together the system and user prompts.</p>
 </section>
 <section id="requesting-responses">
-<h2>Requesting Responses<a class="headerlink" href="#requesting-responses" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.6. </span>Requesting Responses<a class="headerlink" href="#requesting-responses" title="Link to this heading">#</a></h2>
 <p>We send the formatted prompts to different LLMs and display their responses.</p>
 <p><strong>GPT Models</strong></p>
 <div class="cell docutils container">
@@ -543,7 +542,7 @@ There was just too much variance in the relationship, and they couldn&#39;t find
 <p>Each model’s distinct characteristics shine through their unique interpretations of the prompt.</p>
 </section>
 <section id="simulating-conversations">
-<h2>Simulating Conversations<a class="headerlink" href="#simulating-conversations" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.7. </span>Simulating Conversations<a class="headerlink" href="#simulating-conversations" title="Link to this heading">#</a></h2>
 <p>Now, we orchestrate a conversation among the three LLMs by defining their personalities and passing messages back and forth.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -713,7 +712,7 @@ There was just too much variance in the relationship, and they couldn&#39;t find
 </div>
 </section>
 <section id="conclusion">
-<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.8. </span>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
 <p>By assigning distinct personalities and orchestrating structured exchanges, this Python script demonstrates the potential of LLMs to engage in entertaining and meaningful conversations. Whether for entertainment, research, or practical applications, this approach highlights how these models can complement each other in creative ways.</p>
 <p>Try running this script yourself and see what fascinating dialogues you can create between AI “friends”!</p>
 </section>
@@ -755,7 +754,7 @@ There was just too much variance in the relationship, and they couldn&#39;t find
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Creating Brochures with LLMs</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Creating Brochures with LLMs</p>
       </div>
     </a>
     <a class="right-next"
@@ -763,7 +762,7 @@ There was just too much variance in the relationship, and they couldn&#39;t find
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Cost-Sensitive Learning</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Cost-Sensitive Learning</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -784,14 +783,14 @@ There was just too much variance in the relationship, and they couldn&#39;t find
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-the-environment">Setting Up the Environment</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-api-keys">Loading API Keys</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initializing-model-clients">Initializing Model Clients</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-some-models">Testing Some Models</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-prompts">Preparing the Prompts</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requesting-responses">Requesting Responses</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulating-conversations">Simulating Conversations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-the-environment">2.1. Setting Up the Environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-api-keys">2.2. Loading API Keys</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initializing-model-clients">2.3. Initializing Model Clients</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-some-models">2.4. Testing Some Models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-prompts">2.5. Preparing the Prompts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requesting-responses">2.6. Requesting Responses</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulating-conversations">2.7. Simulating Conversations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">2.8. Conclusion</a></li>
 </ul>
   </nav></div>
 

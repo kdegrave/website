@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Predicting Housing Prices With Gradient Boosted Decision Trees</title>
+    <title>2. Predicting Housing Prices With Gradient Boosted Decision Trees</title>
   
   
   
@@ -61,10 +61,9 @@
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ames_housing_regression';</script>
-    <link rel="icon" href="_static/altair-hist.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Cost-Sensitive Learning" href="cost_sensitive_learning.html" />
+    <link rel="prev" title="1. Cost-Sensitive Learning" href="cost_sensitive_learning.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -170,13 +169,13 @@
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">LLMs</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="llm_brochure_maker.html">Creating Brochures with LLMs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="llm_conversation.html">Conversations with LLMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="llm_brochure_maker.html">1. Creating Brochures with LLMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="llm_conversation.html">2. Conversations with LLMs</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Other Projects</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="cost_sensitive_learning.html">Cost-Sensitive Learning</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Predicting Housing Prices With Gradient Boosted Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cost_sensitive_learning.html">1. Cost-Sensitive Learning</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Predicting Housing Prices With Gradient Boosted Decision Trees</a></li>
 </ul>
 
     </div>
@@ -317,21 +316,21 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-the-environment">Setting Up the Environment</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-and-cleaning-the-data">Loading and Cleaning the Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploratory-data-analysis">Exploratory Data Analysis</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-missing-data">Handling Missing Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-engineering">Feature Engineering</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#separating-features">Separating Features</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-a-predictive-model">Building a Predictive Model</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-setup">Model Setup</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#splitting-data">Splitting Data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing">Preprocessing</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameter-optimization">Hyperparameter Optimization</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-predictions">Model Predictions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-the-environment">2.1. Setting Up the Environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-and-cleaning-the-data">2.2. Loading and Cleaning the Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploratory-data-analysis">2.3. Exploratory Data Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-missing-data">2.4. Handling Missing Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-engineering">2.5. Feature Engineering</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#separating-features">2.6. Separating Features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-a-predictive-model">2.7. Building a Predictive Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-setup">2.7.1. Model Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#splitting-data">2.7.2. Splitting Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing">2.7.3. Preprocessing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameter-optimization">2.7.4. Hyperparameter Optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-predictions">2.7.5. Model Predictions</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">2.8. Conclusion</a></li>
 </ul>
             </nav>
         </div>
@@ -344,10 +343,10 @@
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="predicting-housing-prices-with-gradient-boosted-decision-trees">
-<h1>Predicting Housing Prices With Gradient Boosted Decision Trees<a class="headerlink" href="#predicting-housing-prices-with-gradient-boosted-decision-trees" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">2. </span>Predicting Housing Prices With Gradient Boosted Decision Trees<a class="headerlink" href="#predicting-housing-prices-with-gradient-boosted-decision-trees" title="Link to this heading">#</a></h1>
 <p>This project walks through the analysis prediction of housing prices using the Ames Housing dataset. We will cover data preprocessing, feature engineering, and building a predictive model using a gradient boosting regressor. Let’s dive in!</p>
 <section id="setting-up-the-environment">
-<h2>Setting Up the Environment<a class="headerlink" href="#setting-up-the-environment" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.1. </span>Setting Up the Environment<a class="headerlink" href="#setting-up-the-environment" title="Link to this heading">#</a></h2>
 <p>We begin by configuring the plotting backend, importing necessary libraries, and setting display options for pandas to handle large datasets effectively. These steps ensure that plots are rendered in high quality and that all columns of the dataset are visible without truncation, making it easier to analyze data comprehensively.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -372,7 +371,7 @@
 </div>
 </section>
 <section id="loading-and-cleaning-the-data">
-<h2>Loading and Cleaning the Data<a class="headerlink" href="#loading-and-cleaning-the-data" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.2. </span>Loading and Cleaning the Data<a class="headerlink" href="#loading-and-cleaning-the-data" title="Link to this heading">#</a></h2>
 <p>Next, we load the dataset and perform initial cleaning. Outliers, such as houses with disproportionately large living areas but low sale prices, are removed. This helps improve the reliability of our analysis and ensures the model focuses on typical data patterns.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -385,7 +384,7 @@
 </div>
 </section>
 <section id="exploratory-data-analysis">
-<h2>Exploratory Data Analysis<a class="headerlink" href="#exploratory-data-analysis" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.3. </span>Exploratory Data Analysis<a class="headerlink" href="#exploratory-data-analysis" title="Link to this heading">#</a></h2>
 <p>We begin by visualizing missing data in the dataset. Missing data can provide insight into the quality of the dataset and highlight features that may require imputation or special handling.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -425,7 +424,7 @@
 </div>
 </section>
 <section id="handling-missing-data">
-<h2>Handling Missing Data<a class="headerlink" href="#handling-missing-data" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.4. </span>Handling Missing Data<a class="headerlink" href="#handling-missing-data" title="Link to this heading">#</a></h2>
 <p>To address missing values, we replace them with appropriate default values or summaries. For example, categorical variables like <code class="docutils literal notranslate"><span class="pre">PoolQC</span></code> and <code class="docutils literal notranslate"><span class="pre">Fence</span></code> are filled with “Missing” to indicate the absence of these features, while numeric variables such as <code class="docutils literal notranslate"><span class="pre">LotFrontage</span></code> use the median value. This step ensures no information is lost and avoids errors during model training.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -464,7 +463,7 @@
 </div>
 </section>
 <section id="feature-engineering">
-<h2>Feature Engineering<a class="headerlink" href="#feature-engineering" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.5. </span>Feature Engineering<a class="headerlink" href="#feature-engineering" title="Link to this heading">#</a></h2>
 <p>Creating meaningful features enhances the predictive power of our model. For instance, <code class="docutils literal notranslate"><span class="pre">TimeSinceBuild</span></code> indicates the age of the house, and <code class="docutils literal notranslate"><span class="pre">TotalSF</span></code> combines basement and above-ground living area into one comprehensive metric. These derived features help the model better capture trends that may not be apparent in individual variables.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -480,7 +479,7 @@
 </div>
 </section>
 <section id="separating-features">
-<h2>Separating Features<a class="headerlink" href="#separating-features" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.6. </span>Separating Features<a class="headerlink" href="#separating-features" title="Link to this heading">#</a></h2>
 <p>To simplify modeling, we categorize features into continuous, discrete, ordinal, and nominal types. Continuous features are numerical and can take on a wide range of values, while ordinal features have a natural order (e.g., quality ratings). Separating features allows for tailored preprocessing techniques during modeling.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -604,9 +603,9 @@
 </div>
 </section>
 <section id="building-a-predictive-model">
-<h2>Building a Predictive Model<a class="headerlink" href="#building-a-predictive-model" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.7. </span>Building a Predictive Model<a class="headerlink" href="#building-a-predictive-model" title="Link to this heading">#</a></h2>
 <section id="model-setup">
-<h3>Model Setup<a class="headerlink" href="#model-setup" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">2.7.1. </span>Model Setup<a class="headerlink" href="#model-setup" title="Link to this heading">#</a></h3>
 <p>We use a histogram-based gradient boosting regressor, which is well-suited for tabular data and trains quickly. This approach leverages ensemble learning to minimize prediction error.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -627,7 +626,7 @@
 </div>
 </section>
 <section id="splitting-data">
-<h3>Splitting Data<a class="headerlink" href="#splitting-data" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">2.7.2. </span>Splitting Data<a class="headerlink" href="#splitting-data" title="Link to this heading">#</a></h3>
 <p>The dataset is split into training and testing sets to evaluate the model’s performance on unseen data. A random state ensures reproducibility of results.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -638,7 +637,7 @@
 </div>
 </section>
 <section id="preprocessing">
-<h3>Preprocessing<a class="headerlink" href="#preprocessing" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">2.7.3. </span>Preprocessing<a class="headerlink" href="#preprocessing" title="Link to this heading">#</a></h3>
 <p>Categorical variables are one-hot encoded to convert them into numerical format, while other features are left as-is. This pipeline ensures consistent preprocessing across all features.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -660,7 +659,7 @@
 </div>
 </section>
 <section id="hyperparameter-optimization">
-<h3>Hyperparameter Optimization<a class="headerlink" href="#hyperparameter-optimization" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">2.7.4. </span>Hyperparameter Optimization<a class="headerlink" href="#hyperparameter-optimization" title="Link to this heading">#</a></h3>
 <p>Using the Hyperopt library, we perform a search for the best combination of hyperparameters. This automated process reduces the need for manual tuning and can significantly improve model performance.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -735,7 +734,7 @@
 </div>
 </section>
 <section id="model-predictions">
-<h3>Model Predictions<a class="headerlink" href="#model-predictions" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">2.7.5. </span>Model Predictions<a class="headerlink" href="#model-predictions" title="Link to this heading">#</a></h3>
 <p>Lastly, we can explore the peformance of the model. Training output suggests the model’s root mean square error is around $26,000. Let’s see how it performs on the test data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -782,7 +781,7 @@
 </section>
 </section>
 <section id="conclusion">
-<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.8. </span>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
 <p>This project demonstrates the complete workflow of predicting housing prices using the Ames Housing dataset. We began by cleaning the data, handling missing values, and engineering meaningful features to enhance the model’s predictive power. Exploratory data analysis provided key insights into trends and patterns, while hyperparameter optimization ensured the best model performance. Using advanced techniques like gradient boosting regression and a structured preprocessing pipeline, we achieved a robust solution for this regression problem.</p>
 <p>Whether you’re a beginner or an experienced data scientist, this case study highlights the importance of thoughtful preprocessing, careful feature engineering, and leveraging modern machine learning methods. The approach used here can be adapted to other tabular datasets, making it a versatile example for future projects.</p>
 <p>Thank you for following along!</p>
@@ -825,7 +824,7 @@
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Cost-Sensitive Learning</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Cost-Sensitive Learning</p>
       </div>
     </a>
 </div>
@@ -845,21 +844,21 @@
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-the-environment">Setting Up the Environment</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-and-cleaning-the-data">Loading and Cleaning the Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploratory-data-analysis">Exploratory Data Analysis</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-missing-data">Handling Missing Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-engineering">Feature Engineering</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#separating-features">Separating Features</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-a-predictive-model">Building a Predictive Model</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-setup">Model Setup</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#splitting-data">Splitting Data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing">Preprocessing</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameter-optimization">Hyperparameter Optimization</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-predictions">Model Predictions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-the-environment">2.1. Setting Up the Environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-and-cleaning-the-data">2.2. Loading and Cleaning the Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploratory-data-analysis">2.3. Exploratory Data Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-missing-data">2.4. Handling Missing Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-engineering">2.5. Feature Engineering</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#separating-features">2.6. Separating Features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-a-predictive-model">2.7. Building a Predictive Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-setup">2.7.1. Model Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#splitting-data">2.7.2. Splitting Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing">2.7.3. Preprocessing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameter-optimization">2.7.4. Hyperparameter Optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-predictions">2.7.5. Model Predictions</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">2.8. Conclusion</a></li>
 </ul>
   </nav></div>
 

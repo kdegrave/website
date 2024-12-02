@@ -13,8 +13,8 @@ Hi, I'm Kyle. I'm a data scientist with over 7 years of experience in developing
 
 2. DeGrave, K., and Jackiewicz, J. *"Helioseismic Investigation of Modeled and Observed Supergranule Structure."* Solar Physics, Volume 290, Pages 1547–1568, 2015. DOI: [10.1007/s11207-015-0693-0](https://doi.org/10.1007/s11207-015-0693-0).
 
-3. DeGrave, K., Jackiewicz, J., and Rempel, M. *"Time-Distance Helioseismology of Two Realistic Sunspot Simulations"*. The Astrophysical Journal, Volume 794, Number 1, 2014. DOI: [10.1088/0004-637X/794/1/18](https://doi.org/10.1088/0004-637X/794/1/18).
+3. DeGrave, K., Jackiewicz, J., and Rempel, M. *"Time-Distance Helioseismology of Two Realistic Sunspot Simulations."* The Astrophysical Journal, Volume 794, Number 1, 2014. DOI: [10.1088/0004-637X/794/1/18](https://doi.org/10.1088/0004-637X/794/1/18).
 
 4. DeGrave, K., Jackiewicz, J., and Rempel, M. *"Validating Time–Distance Helioseismology with Realistic Quiet-Sun Simulations."* The Astrophysical Journal, Volume 788, Number 2, 2014. DOI: [10.1088/0004-637X/788/2/127](https://doi.org/10.1088/0004-637X/788/2/127).
 
-5. DeGrave, K., and Jackiewicz, J. *"Publication."* Astronomische Nachrichten, Volume 333, Issue 10, Page 998, December 2012. DOI: [10.1002/asna.201211788](https://doi.org/10.1002/asna.201211788).
+5. DeGrave, K., and Jackiewicz, J. *"Example Inversion for a New Generalized Local Helioseismology Pipeline."* Astronomische Nachrichten, Volume 333, Issue 10, Page 998, December 2012. DOI: [10.1002/asna.201211788](https://doi.org/10.1002/asna.201211788).

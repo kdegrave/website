@@ -718,7 +718,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 50/50 [02:37&lt;00:00,  3.15s/trial, best loss: 25766.14454870276]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 50/50 [03:20&lt;00:00,  4.01s/trial, best loss: 26110.72145846042]
 </pre></div>
 </div>
 </div>
@@ -750,20 +750,20 @@
 
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_te</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">prediction</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">600000</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">600000</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Predicted SalesPrice&#39;</span><span class="p">)</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Actual SalesPrice&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Predicted SalePrice&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Actual SalePrice&#39;</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">600000</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">600000</span><span class="p">)</span>
 
 <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_te</span><span class="o">.</span><span class="n">values</span> <span class="o">-</span> <span class="n">prediction</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_te</span><span class="p">)],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Residual (Actual - Predicted SalesPrice)&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Residual (Actual - Predicted SalePrice)&#39;</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_te</span><span class="p">));</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/6fe3e57f41a697f078dd654620318d044abb7b6b9b44ad59779fc4a70cf8090a.png"><img alt="_images/6fe3e57f41a697f078dd654620318d044abb7b6b9b44ad59779fc4a70cf8090a.png" src="_images/6fe3e57f41a697f078dd654620318d044abb7b6b9b44ad59779fc4a70cf8090a.png" style="width: 864px; height: 370px;" /></a>
+<a class="reference internal image-reference" href="_images/7df8f96b79f629c9795108b9bee65ac950e145327996365b970c23dd0a790c52.png"><img alt="_images/7df8f96b79f629c9795108b9bee65ac950e145327996365b970c23dd0a790c52.png" src="_images/7df8f96b79f629c9795108b9bee65ac950e145327996365b970c23dd0a790c52.png" style="width: 864px; height: 370px;" /></a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -773,12 +773,12 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20415.23945469856
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>22679.769427367697
 </pre></div>
 </div>
 </div>
 </div>
-<p>The model actually performs somewhat better on the test set with a root mean squared error of around $20,000. This solid performance is illustrated by plotting the predicted vs. actual <code class="docutils literal notranslate"><span class="pre">SalesPrice</span></code>, which shows a nearly linear relationship between the two. The residual plot displays a random distribution of values around zero with no evidence of heteroscedasticity.</p>
+<p>The model actually performs somewhat better on the test set with a root mean squared error of around $23,000. This solid performance is illustrated by plotting the predicted vs. actual <code class="docutils literal notranslate"><span class="pre">SalePrice</span></code>, which shows a nearly linear relationship between the two. The residual plot displays a random distribution of values around zero with no evidence of heteroscedasticity.</p>
 </section>
 </section>
 <section id="conclusion">
